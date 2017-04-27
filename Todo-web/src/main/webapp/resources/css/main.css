@@ -1,0 +1,27 @@
+body {
+    background: #eaf2f5;
+}
+
+ul.side-nav.fixed li.logo {
+    margin: 0;
+}
+
+.side-nav li>a>i.material-icons {
+    color: #fff;
+}
+
+.col.list {
+    background: #bbc2c4;
+    border: 3px solid #bbc2c4;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(36,102,149,0.2);
+    margin-top: 50px;
+    padding: 0;
+}
+
+.list .title {
+    height: 40px;
+    background: #ffffff;
+    margin: 0px 0px 1px 0px;
+    position: relative;
+}
