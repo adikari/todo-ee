@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+
+        <ul id="nav-mobile" class="side-nav fixed">
+            <li class="logo">
+                <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
+                    <h2>Todo</h2>
+                </a>
+            </li>
+
+            <li>
+                <h:commandLink class="btn waves-effect waves-light" action="#{navigationBean.addList}">
+                    Add new list<i class="material-icons right">add</i>
+                    <f:ajax execute="@form" render="lists" />
+                </h:commandLink>
+            </li>
+
+            <h:panelGroup id="lists">
+                <ui:repeat value="#{navigationBean.lists}" var="list">
+                    <ui:include src="list.xhtml" />
+                </ui:repeat>
+            </h:panelGroup>
+
+        </ul>
+    </h:form>
+</ui:fragment>
+

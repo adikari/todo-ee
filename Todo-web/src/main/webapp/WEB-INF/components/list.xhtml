@@ -5,12 +5,9 @@
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:repeat value="#{navigationBean.lists}" var="list">
-        <li class="bold">
-            <h:commandLink class="waves-effect waves-teal" value="#{list}" action="#{navigationBean.setPage('todoitem')}">
-                <f:ajax execute="@form" render=":content" />
-            </h:commandLink>
-        </li>
-    </ui:repeat>
+    <li class="bold">
+        <h:commandLink class="waves-effect waves-teal" value="#{list}">
+        </h:commandLink>
+    </li>
 </ui:fragment>
 
