@@ -25,3 +25,9 @@ ul.side-nav.fixed li.logo {
     margin: 0px 0px 1px 0px;
     position: relative;
 }
+
+.action-button {
+    top: 7px;
+    position: relative;
+    left: 5px;
+}
