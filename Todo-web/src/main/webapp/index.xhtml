@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Start Page</title>
 
@@ -12,27 +14,37 @@
         <h:outputStylesheet library="css" name="matarialize.min.css"  />
 
         <h:outputStylesheet library="css" name="main.css"  />
-
-        <ul id="nav-mobile" class="side-nav fixed">
-            <li class="logo">
-                <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
-                    <h2>Todo</h2>
-                </a>
-            </li>
-            <li>
-                <h:link class="btn waves-effect waves-light">
-                    Add new list<i class="material-icons right">add</i>
-                </h:link>
-            </li>
-            <li class="bold"><a href="about.html" class="waves-effect waves-teal">List 1</a></li>
-            <li class="bold"><a href="about.html" class="waves-effect waves-teal">List 2</a></li>
-        </ul>
+        <h:form>
+            
+                <ul id="nav-mobile" class="side-nav fixed">
+                    <li class="logo">
+                        <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
+                            <h2>Todo</h2>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <h:commandLink class="btn waves-effect waves-light" action="#{navigationBean.addList}">
+                            Add new list<i class="material-icons right">add</i>
+                            <f:ajax execute="@form" render="lists" />
+                        </h:commandLink>
+                    </li>
+                    
+                    <h:panelGroup id="lists">
+                        <ui:include src="lists.xhtml" />
+                    </h:panelGroup>
+                </ul>
+        </h:form>
 
         <main>
             <div class="container">
                 <div class="row">
                     <div class="col s12 list">
-                        <div class="title"></div>
+                        <div class="title">
+                            <h:panelGroup id="content">
+                                <ui:include src="#{navigationBean.page}" />
+                            </h:panelGroup>
+                        </div>
                     </div>
                 </div>
             </div>
