@@ -8,6 +8,11 @@
     <div class="title">
         <h:form>
             <h:commandLink class="action-button"><i class="material-icons">delete</i></h:commandLink>
+            <p>#{todoBean.selectedList.title}</p>
+            
+            <ui:repeat value="#{todoBean.todoItems}" var="todoItem">
+                <p>#{todoItem.title}</p>
+            </ui:repeat>
         </h:form>
     </div>
 </ui:fragment>
