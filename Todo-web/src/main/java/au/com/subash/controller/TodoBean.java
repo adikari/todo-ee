@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -17,20 +18,24 @@ import java.util.List;
 public class TodoBean implements Serializable {
 
     private List<TodoList> todoLists;
-    private List<TodoItem> todoItems;
     private TodoList selectedList;
     
     public TodoBean() {
         todoLists = new ArrayList();
         
-        ArrayList<TodoItem> todoItems = new ArrayList();
-        todoItems.add(new TodoItem("Work on assignment"));
-        todoItems.add(new TodoItem("Call sujan"));
+        ArrayList<TodoItem> todoItems1 = new ArrayList();
+        todoItems1.add(new TodoItem("Work on assignment"));
+        todoItems1.add(new TodoItem("Call sujan"));
         
-        todoLists.add(new TodoList("list 1", todoItems));
-        todoLists.add(new TodoList("list 2"));
+                
+        ArrayList<TodoItem> todoItems2 = new ArrayList();
+        todoItems2.add(new TodoItem("Make some breakfast"));
+        todoItems2.add(new TodoItem("Go to Caufield"));
         
-        selectTodoList(todoLists.get(0));
+        todoLists.add(new TodoList("list 1", todoItems1));
+        todoLists.add(new TodoList("list 2", todoItems2));
+        
+        selectedList = todoLists.get(0);
     }
 
     public List<TodoList> getTodoLists() {
@@ -39,14 +44,6 @@ public class TodoBean implements Serializable {
 
     public void setTodoLists(List<TodoList> todoLists) {
         this.todoLists = todoLists;
-    }
-
-    public List<TodoItem> getTodoItems() {
-        return todoItems;
-    }
-
-    public void setTodoItems(List<TodoItem> todoItems) {
-        this.todoItems = todoItems;
     }
 
     public TodoList getSelectedList() {
@@ -61,16 +58,25 @@ public class TodoBean implements Serializable {
      * Add new todo list
      */
     public void addTodoList() {
-        todoLists.add(new TodoList("Untitled"));
+        selectedList = new TodoList("Untitled");
+        todoLists.add(selectedList);
+        
+        render("main");
     }
     
     public void selectTodoList(TodoList list) {
-        TodoList todoList = todoLists.stream()
+        selectedList = todoLists.stream()
                 .filter(l -> l.getTitle().equals(list.getTitle()))
                 .findFirst()
                 .get();
-        
-        selectedList = todoList;
-        todoItems = selectedList.getTodoItems();
+    }
+    
+    /**
+     * Re-render the view
+     * 
+     * @param id Render id
+     */
+    private void render(String id) {
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(id);
     }
 }

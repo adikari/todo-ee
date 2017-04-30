@@ -5,15 +5,17 @@
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <div class="title">
-        <h:form>
-            <h:commandLink class="action-button"><i class="material-icons">delete</i></h:commandLink>
-            <p>#{todoBean.selectedList.title}</p>
-            
-            <ui:repeat value="#{todoBean.todoItems}" var="todoItem">
-                <p>#{todoItem.title}</p>
-            </ui:repeat>
-        </h:form>
-    </div>
+    <h:panelGroup id="main">
+        <div class="title">
+            <h:form>
+                <h:commandLink class="action-button"><i class="material-icons">delete</i></h:commandLink>
+                <p>#{todoBean.selectedList.title}</p>
+
+                <ui:repeat value="#{todoBean.selectedList.todoItems}" var="todoItem">
+                    <p>#{todoItem.title}</p>
+                </ui:repeat>
+            </h:form>
+        </div>
+    </h:panelGroup>
 </ui:fragment>
 
