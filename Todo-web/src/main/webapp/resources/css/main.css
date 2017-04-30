@@ -26,8 +26,53 @@ ul.side-nav.fixed li.logo {
     position: relative;
 }
 
-.action-button {
+.list .title h1 {
+    display: block;
+    margin: 0px 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: text;
+    font-weight: bold;
+}
+
+.list .title .delete {
+    position: absolute;
     top: 7px;
+    right: 5px;
+    z-index: 2;
+    display: block;
+}
+
+.list .new {
     position: relative;
-    left: 5px;
+    background: #ffffff;
+    margin: 0px 0px 1px 0px;
+    padding: 0px 8px;
+    position: relative;
+}
+
+.list .new, .list .new input, .list ul li {
+    height: 40px;
+}
+
+.list .new input {
+    margin-bottom: 0;
+}
+
+.list ul {
+    margin: 0;
+}
+
+.list ul li {
+    display: block;
+    margin: 0px 0px 1px 0px;
+    background: #ffffff;
+}
+
+.list ul li .item {
+    padding: 10px;
+    position: relative;
 }

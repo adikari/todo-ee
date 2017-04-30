@@ -3,19 +3,32 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://java.sun.com/jsf/html"
              xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:panelGroup id="main">
         <div class="title">
+            <h1>#{todoBean.selectedList.title}</h1>
             <h:form>
-                <h:commandLink class="action-button"><i class="material-icons">delete</i></h:commandLink>
-                <p>#{todoBean.selectedList.title}</p>
-
-                <ui:repeat value="#{todoBean.selectedList.todoItems}" var="todoItem">
-                    <p>#{todoItem.title}</p>
-                </ui:repeat>
+                <h:commandLink class="delete"><i class="material-icons">delete</i></h:commandLink>
             </h:form>
         </div>
+
+        <div class="new input-field">
+            <h:form onsubmit="return false;">
+                <h:inputText a:placeholder="New todo item" binding="#{todoItem}">
+                    <f:ajax render="todoItems" listener="#{todoBean.addTodoItem(todoItem)}" event="change" />
+                </h:inputText>
+            </h:form>
+        </div>
+
+        <h:panelGroup id="todoItems">
+            <ul>
+                <ui:repeat value="#{todoBean.selectedList.todoItems}" var="todoItem">
+                    <ui:include src="todoitem.xhtml" />
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
     </h:panelGroup>
 </ui:fragment>
 

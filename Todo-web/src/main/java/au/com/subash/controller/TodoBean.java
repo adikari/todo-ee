@@ -7,7 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.context.FacesContext;
+import javax.faces.component.UIInput;
 
 /**
  *
@@ -69,4 +69,11 @@ public class TodoBean implements Serializable {
                 .get();
     }
     
+    public void addTodoItem(UIInput newTodoItemUi) {
+        String newTodoItem = newTodoItemUi.getValue().toString();
+        if (null == newTodoItem || newTodoItem.isEmpty()) { return; }
+        
+        selectedList.getTodoItems().add(new TodoItem(newTodoItem));
+        newTodoItemUi.resetValue();
+    } 
 }
