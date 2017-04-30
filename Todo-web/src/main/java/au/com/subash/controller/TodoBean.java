@@ -7,7 +7,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.component.UIInput;
 
 /**
  *
@@ -19,6 +18,15 @@ public class TodoBean implements Serializable {
 
     private List<TodoList> todoLists;
     private TodoList selectedList;
+    private String newTodoItem;
+
+    public String getNewTodoItem() {
+        return newTodoItem;
+    }
+
+    public void setNewTodoItem(String newTodoItem) {
+        this.newTodoItem = newTodoItem;
+    }
     
     public TodoBean() {
         todoLists = new ArrayList();
@@ -67,13 +75,15 @@ public class TodoBean implements Serializable {
                 .filter(l -> l.getTitle().equals(list.getTitle()))
                 .findFirst()
                 .get();
+        
     }
     
-    public void addTodoItem(UIInput newTodoItemUi) {
-        String newTodoItem = newTodoItemUi.getValue().toString();
-        if (null == newTodoItem || newTodoItem.isEmpty()) { return; }
+    public void addTodoItem() {
+        if (null == newTodoItem || newTodoItem.isEmpty()) { 
+            return; 
+        }
         
         selectedList.getTodoItems().add(new TodoItem(newTodoItem));
-        newTodoItemUi.resetValue();
+        setNewTodoItem(null);
     } 
 }
