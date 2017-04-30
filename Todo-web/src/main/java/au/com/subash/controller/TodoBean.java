@@ -60,8 +60,6 @@ public class TodoBean implements Serializable {
     public void addTodoList() {
         selectedList = new TodoList("Untitled");
         todoLists.add(selectedList);
-        
-        render("main");
     }
     
     public void selectTodoList(TodoList list) {
@@ -71,12 +69,4 @@ public class TodoBean implements Serializable {
                 .get();
     }
     
-    /**
-     * Re-render the view
-     * 
-     * @param id Render id
-     */
-    private void render(String id) {
-        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(id);
-    }
 }
