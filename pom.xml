@@ -10,5 +10,6 @@
     <module>Todo-ear</module>
     <module>Todo-web</module>
     <module>Todo-ejb</module>
+    <module>Todo-ri</module>
   </modules>
 </project>

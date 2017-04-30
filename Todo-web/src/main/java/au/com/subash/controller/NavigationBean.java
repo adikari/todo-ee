@@ -1,11 +1,12 @@
 package au.com.subash.controller;
 
+import au.com.subash.entity.TodoItem;
+import au.com.subash.entity.TodoList;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 
 /**
  *
@@ -15,36 +16,28 @@ import javax.annotation.PostConstruct;
 @SessionScoped
 public class NavigationBean implements Serializable {
 
-    private static final String EXT = ".xhtml";
+    private List<TodoList> todoLists;
     
-    private String page;
-    private List<String> lists;
+    public NavigationBean() {
+        todoLists = new ArrayList();
+        
+        ArrayList<TodoItem> todoItems = new ArrayList();
+        todoItems.add(new TodoItem("Work on assignment"));
+        todoItems.add(new TodoItem("Call sujan"));
+        
+        todoLists.add(new TodoList("list 1", todoItems));
+        todoLists.add(new TodoList("list 2"));
+    }
 
-    @PostConstruct
-    public void init() {
-        page = "start" + EXT; //  Default include.
-        lists = new ArrayList();
-        lists.add("list1");
-        lists.add("list2");
+    public List<TodoList> getTodoLists() {
+        return todoLists;
+    }
+
+    public void setTodoLists(List<TodoList> todoLists) {
+        this.todoLists = todoLists;
     }
     
-    public void addList() {
-        lists.add("Untitled");
-    }
-
-    public List<String> getLists() {
-        return lists;
-    }
-
-    public void setLists(List<String> lists) {
-        this.lists = lists;
-    }
-
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page + EXT;
+    public void addTodoList() {
+        todoLists.add(new TodoList("Untitled"));
     }
 }

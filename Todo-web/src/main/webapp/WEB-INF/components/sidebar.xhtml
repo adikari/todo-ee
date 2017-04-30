@@ -15,14 +15,14 @@
             </li>
 
             <li>
-                <h:commandLink class="btn waves-effect waves-light" action="#{navigationBean.addList}">
+                <h:commandLink class="btn waves-effect waves-light" action="#{navigationBean.addTodoList}">
                     Add new list<i class="material-icons right">add</i>
                     <f:ajax execute="@form" render="lists" />
                 </h:commandLink>
             </li>
 
             <h:panelGroup id="lists">
-                <ui:repeat value="#{navigationBean.lists}" var="list">
+                <ui:repeat value="#{navigationBean.todoLists}" var="todoList">
                     <ui:include src="list.xhtml" />
                 </ui:repeat>
             </h:panelGroup>
