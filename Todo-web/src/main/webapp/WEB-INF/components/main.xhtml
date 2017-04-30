@@ -16,8 +16,8 @@
 
         <div class="new input-field">
             <h:form onsubmit="return false;">
-                <h:inputText id="newTodoItem" a:placeholder="New todo item" value="#{todoBean.newTodoItem}">
-                    <f:ajax render="main" listener="#{todoBean.addTodoItem}" event="change" resetValues="true" />
+                <h:inputText a:placeholder="New todo item" value="#{todoBean.newTodoItem}">
+                    <f:ajax execute="@form" render=":main" listener="#{todoBean.addTodoItem}" event="change" resetValues="true" />
                 </h:inputText>
             </h:form>
         </div>

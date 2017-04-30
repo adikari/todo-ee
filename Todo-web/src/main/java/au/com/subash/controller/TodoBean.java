@@ -74,8 +74,7 @@ public class TodoBean implements Serializable {
         selectedList = todoLists.stream()
                 .filter(l -> l.getTitle().equals(list.getTitle()))
                 .findFirst()
-                .get();
-        
+                .get();  
     }
     
     public void addTodoItem() {
