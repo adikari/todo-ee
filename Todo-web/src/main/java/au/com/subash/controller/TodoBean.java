@@ -85,4 +85,14 @@ public class TodoBean implements Serializable {
         selectedList.getTodoItems().add(new TodoItem(newTodoItem));
         setNewTodoItem(null);
     } 
+    
+    public void deleteTodoList() {
+        todoLists.remove(selectedList);
+        
+        if (todoLists.size() > 0) {
+            selectedList = todoLists.get(0);
+        } else {
+            selectedList = null;
+        }
+    }
 }

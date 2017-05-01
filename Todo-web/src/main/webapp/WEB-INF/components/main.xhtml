@@ -4,31 +4,40 @@
              xmlns:h="http://java.sun.com/jsf/html"
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-             xmlns:f="http://xmlns.jcp.org/jsf/core">
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:panelGroup id="main">
-        <div class="title">
-            <h1>#{todoBean.selectedList.title}</h1>
-            <h:form>
-                <h:commandLink class="delete"><i class="material-icons">delete</i></h:commandLink>
-            </h:form>
-        </div>
+        <c:if test="#{not empty todoBean.selectedList}">
+            <div class="title">
+                <h1>#{todoBean.selectedList.title}</h1>
+                
+                <h:form id="deleteTodo">
+                    <h:commandLink class="delete" onclick="return confirm('Really delete #{todoBean.selectedList.title}?')">
+                        <i class="material-icons">delete</i>
+                        <f:ajax execute="@form" render=":sidebar:lists main" listener="#{todoBean.deleteTodoList}" />
+                    </h:commandLink>
+                </h:form>
+            </div>
 
-        <div class="new input-field">
-            <h:form onsubmit="return false;">
-                <h:inputText a:placeholder="New todo item" value="#{todoBean.newTodoItem}">
-                    <f:ajax execute="@form" render=":main" listener="#{todoBean.addTodoItem}" event="change" resetValues="true" />
-                </h:inputText>
-            </h:form>
-        </div>
+            <div class="new input-field">
+                <h:form id="addTodo" onsubmit="return false;">
+                    <h:inputText a:placeholder="New todo item" value="#{todoBean.newTodoItem}">
+                        <f:ajax execute="@form" render="main" listener="#{todoBean.addTodoItem}" event="change" resetValues="true" />
+                    </h:inputText>
+                </h:form>
+            </div>
 
-        <h:panelGroup id="todoItems">
             <ul>
                 <ui:repeat value="#{todoBean.selectedList.todoItems}" var="todoItem">
                     <ui:include src="todoitem.xhtml" />
                 </ui:repeat>
             </ul>
-        </h:panelGroup>
+        </c:if>
+
+        <c:if test="#{empty todoBean.selectedList}">
+            <p class="empty">There are no Todo Lists. Please create one.</p>
+        </c:if>
     </h:panelGroup>
 </ui:fragment>
 

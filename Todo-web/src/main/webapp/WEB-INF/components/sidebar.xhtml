@@ -5,7 +5,7 @@
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:form>
+    <h:form id="sidebar">
 
         <ul id="nav-mobile" class="side-nav fixed">
             <li class="logo">
@@ -15,9 +15,9 @@
             </li>
 
             <li>
-                <h:commandLink class="btn waves-effect waves-light" action="#{todoBean.addTodoList}">
+                <h:commandLink class="btn waves-effect waves-light">
                     Add new list<i class="material-icons right">add</i>
-                    <f:ajax execute="@form" render="lists main" />
+                    <f:ajax execute="@form" render="lists main" listener="#{todoBean.addTodoList}" />
                 </h:commandLink>
             </li>
 
