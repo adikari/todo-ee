@@ -82,3 +82,12 @@ ul.side-nav.fixed li.logo {
     padding: 10px;
     margin: 0;
 }
+
+.ui-inplace-editor {
+    display: none;
+}
+
+.ui-inplace-content input {
+    text-align: center;
+    font-weight: bold;
+}

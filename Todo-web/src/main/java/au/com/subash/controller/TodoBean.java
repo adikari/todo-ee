@@ -19,14 +19,6 @@ public class TodoBean implements Serializable {
     private List<TodoList> todoLists;
     private TodoList selectedList;
     private String newTodoItem;
-
-    public String getNewTodoItem() {
-        return newTodoItem;
-    }
-
-    public void setNewTodoItem(String newTodoItem) {
-        this.newTodoItem = newTodoItem;
-    }
     
     public TodoBean() {
         todoLists = new ArrayList();
@@ -62,6 +54,14 @@ public class TodoBean implements Serializable {
         this.selectedList = selectedList;
     }
     
+    public String getNewTodoItem() {
+        return newTodoItem;
+    }
+
+    public void setNewTodoItem(String newTodoItem) {
+        this.newTodoItem = newTodoItem;
+    }
+    
     /**
      * Add new todo list
      */
@@ -94,5 +94,9 @@ public class TodoBean implements Serializable {
         } else {
             selectedList = null;
         }
+    }
+    
+    public void deleteTodoItem(TodoItem item) {
+        selectedList.getTodoItems().remove(item);
     }
 }
