@@ -1,10 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets">
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui">
 
     <li>
-        <div class="item">#{todoItem.title}</div>
+        <div class="item">
+            <p:inplace editor="true">
+                <p:inputText value="#{todoItem.title}" 
+                             required="true" 
+                             label="text">
+                    <p:ajax event="change" 
+                            oncomplete="$('.ui-inplace-save').click();" 
+                            update="main" />
+                </p:inputText>
+            </p:inplace>
+        </div>
     </li>
 </ui:fragment>
