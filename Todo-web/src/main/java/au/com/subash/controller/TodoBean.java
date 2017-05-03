@@ -19,7 +19,7 @@ public class TodoBean implements Serializable {
     private List<TodoList> todoLists;
     private TodoList selectedList;
     private String newTodoItem;
-    
+
     public TodoBean() {
         todoLists = new ArrayList();
         
@@ -74,7 +74,7 @@ public class TodoBean implements Serializable {
         selectedList = todoLists.stream()
                 .filter(l -> l.getTitle().equals(list.getTitle()))
                 .findFirst()
-                .get();  
+                .get();            
     }
     
     public void addTodoItem() {
@@ -96,7 +96,8 @@ public class TodoBean implements Serializable {
         }
     }
     
-    public void deleteTodoItem(TodoItem item) {
-        selectedList.getTodoItems().remove(item);
+    public void toogleTodoItemStatus(TodoItem todoItem) {
+        // boolean status = !todoItem.getIsDone();
+        // todoItem.setIsDone();
     }
 }

@@ -3,19 +3,21 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://java.sun.com/jsf/html"
              xmlns:ui="http://java.sun.com/jsf/facelets"
-             xmlns:p="http://primefaces.org/ui">
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <li>
         <div class="item">
-            <p:inplace editor="true">
-                <p:inputText value="#{todoItem.title}" 
-                             required="true" 
-                             label="text">
-                    <p:ajax event="change" 
-                            oncomplete="$('.ui-inplace-save').click();" 
-                            update="main" />
-                </p:inputText>
-            </p:inplace>
+            <h:form id="todoItemStatus">
+                <h:selectBooleanCheckbox class="filled-in" id="todo-item">
+                    <f:ajax listener="#{todoBean.toogleTodoItemStatus(todoItem)}" />
+                </h:selectBooleanCheckbox>
+                
+                <h:outputLabel for="todo-item" value="#{todoItem.title}" >
+                    
+                </h:outputLabel>
+            </h:form>
         </div>
     </li>
 </ui:fragment>
