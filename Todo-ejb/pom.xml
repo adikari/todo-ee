@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>Todo</artifactId>
-    <groupId>au.com.subash</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>Todo</artifactId>
+        <groupId>au.com.subash</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>au.com.subash</groupId>
     <artifactId>Todo-ejb</artifactId>
@@ -30,6 +30,23 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <configuration>
+                    <url>jdbc:derby://localhost:1527/todo</url>
+                    <user>todo</user>
+                    <password>todo</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derbyclient</artifactId>
+                        <version>10.13.1.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
