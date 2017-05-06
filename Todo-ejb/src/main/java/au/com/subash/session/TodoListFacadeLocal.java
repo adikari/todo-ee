@@ -5,6 +5,8 @@
  */
 package au.com.subash.session;
 
+import au.com.subash.entity.TodoList;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface TodoListFacadeLocal {
-    
+    List<TodoList> getTodoLists();
 }

@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package au.com.subash.session;
 
+import au.com.subash.entity.TodoItem;
+import au.com.subash.entity.TodoList;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -13,5 +11,9 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ManageTodoListFacadeRemote {
-    
+    List<TodoList> getTodoLists();
+    boolean addTodoList(TodoList list);
+    boolean removeTodoList(int id);
+    boolean updateTodoList(TodoList list);
+    boolean toogleTodoItem(TodoItem item);
 }

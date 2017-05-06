@@ -2,11 +2,12 @@ package au.com.subash.controller;
 
 import au.com.subash.entity.TodoItem;
 import au.com.subash.entity.TodoList;
+import au.com.subash.session.ManageTodoListFacadeRemote;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -16,24 +17,15 @@ import java.util.List;
 @SessionScoped
 public class TodoBean implements Serializable {
 
+    @EJB
+    private ManageTodoListFacadeRemote facade;
+    
     private List<TodoList> todoLists;
     private TodoList selectedList;
     private String newTodoItem;
 
     public TodoBean() {
-        todoLists = new ArrayList();
-        
-        ArrayList<TodoItem> todoItems1 = new ArrayList();
-        todoItems1.add(new TodoItem("Work on assignment", true));
-        todoItems1.add(new TodoItem("Call sujan"));
-        
-                
-        ArrayList<TodoItem> todoItems2 = new ArrayList();
-        todoItems2.add(new TodoItem("Make some breakfast"));
-        todoItems2.add(new TodoItem("Go to Caufield"));
-        
-        todoLists.add(new TodoList("list 1", todoItems1));
-        todoLists.add(new TodoList("list 2", todoItems2));
+        todoLists = facade.getTodoLists();
         
         selectedList = todoLists.get(0);
     }
@@ -101,6 +93,7 @@ public class TodoBean implements Serializable {
     public void addTodoList() {
         selectedList = new TodoList("Untitled");
         todoLists.add(selectedList);
+        facade.addTodoList(selectedList);
     }
     
     /**
@@ -112,6 +105,8 @@ public class TodoBean implements Serializable {
         }
         
         selectedList.getTodoitemCollection().add(new TodoItem(newTodoItem));
+        facade.updateTodoList(selectedList);
+        
         setNewTodoItem(null);
     } 
     
@@ -121,6 +116,7 @@ public class TodoBean implements Serializable {
      */
     public void removeTodoList() {
         todoLists.remove(selectedList);
+        facade.removeTodoList(selectedList.getId());
         
         if (todoLists.size() > 0) {
             selectedList = todoLists.get(0);
@@ -139,6 +135,6 @@ public class TodoBean implements Serializable {
                 .filter(t -> t.getTitle().equals(todoItem.getTitle()))
                 .findFirst().get();
 
-        item.setIscomplete(item.getIscomplete());
+        facade.toogleTodoItem(item);
     }
 }
