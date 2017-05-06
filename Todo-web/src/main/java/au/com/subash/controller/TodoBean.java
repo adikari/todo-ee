@@ -38,18 +38,38 @@ public class TodoBean implements Serializable {
         selectedList = todoLists.get(0);
     }
 
+    /**
+     * Get all lists
+     * 
+     * @return TodoLists
+     */
     public List<TodoList> getTodoLists() {
         return todoLists;
     }
 
+    /**
+     * Set lists
+     * 
+     * @param todoLists TodoLists
+     */
     public void setTodoLists(List<TodoList> todoLists) {
         this.todoLists = todoLists;
     }
 
+    /**
+     * Get selected list
+     * 
+     * @return Selected List 
+     */
     public TodoList getSelectedList() {
         return selectedList;
     }
 
+    /**
+     * Set the selected list
+     * 
+     * @param selectedList TodoList
+     */
     public void setSelectedList(TodoList selectedList) {       
         this.selectedList = todoLists.stream()
                 .filter(l -> l.getTitle().equals(selectedList.getTitle()))
@@ -57,22 +77,35 @@ public class TodoBean implements Serializable {
                 .get();
     }
     
+    /**
+     * Get new item
+     * 
+     * @return Name of new item 
+     */
     public String getNewTodoItem() {
         return newTodoItem;
     }
 
+    /**
+     * Set new item 
+     * 
+     * @param newTodoItem Item title 
+     */
     public void setNewTodoItem(String newTodoItem) {
         this.newTodoItem = newTodoItem;
     }
     
     /**
-     * Add new todo list
+     * Add new list
      */
     public void addTodoList() {
         selectedList = new TodoList("Untitled");
         todoLists.add(selectedList);
     }
     
+    /**
+     * Add item to the list
+     */
     public void addTodoItem() {
         if (null == newTodoItem || newTodoItem.isEmpty()) { 
             return; 
@@ -82,6 +115,10 @@ public class TodoBean implements Serializable {
         setNewTodoItem(null);
     } 
     
+    /**
+     * Remove selected list. This will remove all its items
+     * 
+     */
     public void removeTodoList() {
         todoLists.remove(selectedList);
         
@@ -92,6 +129,11 @@ public class TodoBean implements Serializable {
         }
     }
     
+    /**
+     * Change status of the item
+     * 
+     * @param todoItem TodoItem
+     */
     public void toogleTodoItem(TodoItem todoItem) {
         TodoItem item = selectedList.getTodoItems().stream()
                 .filter(t -> t.getTitle().equals(todoItem.getTitle()))
