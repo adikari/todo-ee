@@ -6,15 +6,15 @@ package au.com.subash.entity;
  */
 public class TodoItem {
     private String title;
-    private Status status;
+    private boolean isComplete;
     
-    public TodoItem(String title, Status status) {
+    public TodoItem(String title, boolean isComplete) {
         this.title = title;
-        this.status = status;
+        this.isComplete = isComplete;
     }
     
     public TodoItem(String title) {
-        this(title, Status.Active);
+        this(title, false);
     }
 
     public String getTitle() {
@@ -25,11 +25,11 @@ public class TodoItem {
         this.title = title;
     }
 
-    public Status getStatus() {
-        return status;
+    public boolean getIsComplete() {
+        return isComplete;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 }

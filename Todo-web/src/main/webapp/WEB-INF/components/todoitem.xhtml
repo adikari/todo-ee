@@ -10,8 +10,8 @@
     <li>
         <div class="item">
             <h:form id="todoItemStatus">
-                <h:selectBooleanCheckbox class="filled-in" id="todo-item">
-                    <f:ajax listener="#{todoBean.toogleTodoItemStatus(todoItem)}" />
+                <h:selectBooleanCheckbox class="filled-in" id="todo-item" value="#{todoItem.isComplete}" >
+                    <f:ajax listener="#{todoBean.toogleTodoItem(todoItem)}" />
                 </h:selectBooleanCheckbox>
                 
                 <h:outputLabel for="todo-item" value="#{todoItem.title}" >

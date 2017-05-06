@@ -7,7 +7,7 @@
 
     <li class="bold">
         <h:commandLink class="waves-effect waves-teal" value="#{todoList.title}">
-            <f:ajax execute="@form" render=":main" listener="#{todoBean.selectTodoList(todoList)}" />
+            <f:ajax execute="@form" render=":main" listener="#{todoBean.setSelectedList(todoList)}" />
         </h:commandLink>
     </li>
 </ui:fragment>

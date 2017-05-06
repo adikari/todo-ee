@@ -24,7 +24,7 @@ public class TodoBean implements Serializable {
         todoLists = new ArrayList();
         
         ArrayList<TodoItem> todoItems1 = new ArrayList();
-        todoItems1.add(new TodoItem("Work on assignment"));
+        todoItems1.add(new TodoItem("Work on assignment", true));
         todoItems1.add(new TodoItem("Call sujan"));
         
                 
@@ -50,8 +50,11 @@ public class TodoBean implements Serializable {
         return selectedList;
     }
 
-    public void setSelectedList(TodoList selectedList) {
-        this.selectedList = selectedList;
+    public void setSelectedList(TodoList selectedList) {       
+        this.selectedList = todoLists.stream()
+                .filter(l -> l.getTitle().equals(selectedList.getTitle()))
+                .findFirst()
+                .get();
     }
     
     public String getNewTodoItem() {
@@ -70,13 +73,6 @@ public class TodoBean implements Serializable {
         todoLists.add(selectedList);
     }
     
-    public void selectTodoList(TodoList list) {
-        selectedList = todoLists.stream()
-                .filter(l -> l.getTitle().equals(list.getTitle()))
-                .findFirst()
-                .get();            
-    }
-    
     public void addTodoItem() {
         if (null == newTodoItem || newTodoItem.isEmpty()) { 
             return; 
@@ -86,7 +82,7 @@ public class TodoBean implements Serializable {
         setNewTodoItem(null);
     } 
     
-    public void deleteTodoList() {
+    public void removeTodoList() {
         todoLists.remove(selectedList);
         
         if (todoLists.size() > 0) {
@@ -96,8 +92,11 @@ public class TodoBean implements Serializable {
         }
     }
     
-    public void toogleTodoItemStatus(TodoItem todoItem) {
-        // boolean status = !todoItem.getIsDone();
-        // todoItem.setIsDone();
+    public void toogleTodoItem(TodoItem todoItem) {
+        TodoItem item = selectedList.getTodoItems().stream()
+                .filter(t -> t.getTitle().equals(todoItem.getTitle()))
+                .findFirst().get();
+
+        item.setIsComplete(item.getIsComplete());
     }
 }
