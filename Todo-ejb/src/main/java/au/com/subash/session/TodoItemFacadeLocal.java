@@ -5,6 +5,7 @@
  */
 package au.com.subash.session;
 
+import au.com.subash.entity.Todoitem;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface TodoItemFacadeLocal {
-    
+    boolean update(Todoitem item);
 }

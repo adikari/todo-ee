@@ -1,6 +1,6 @@
 package au.com.subash.session;
 
-import au.com.subash.entity.TodoList;
+import au.com.subash.entity.Todolist;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,9 +17,22 @@ public class TodoListFacade implements TodoListFacadeLocal {
     private EntityManager em;
 
     @Override
-    public List<TodoList> getTodoLists() {
+    public List<Todolist> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
+    @Override
+    public boolean remove(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean create(Todolist list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(Todolist list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

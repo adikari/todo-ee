@@ -15,5 +15,5 @@ public interface ManageTodoListFacadeRemote {
     boolean addTodoList(TodoList list);
     boolean removeTodoList(int id);
     boolean updateTodoList(TodoList list);
-    boolean toogleTodoItem(TodoItem item);
+    boolean updateTodoItem(TodoItem item);
 }

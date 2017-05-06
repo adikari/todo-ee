@@ -135,6 +135,6 @@ public class TodoBean implements Serializable {
                 .filter(t -> t.getTitle().equals(todoItem.getTitle()))
                 .findFirst().get();
 
-        facade.toogleTodoItem(item);
+        facade.updateTodoItem(item);
     }
 }

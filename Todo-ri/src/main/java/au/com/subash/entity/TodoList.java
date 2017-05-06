@@ -12,6 +12,11 @@ public class TodoList {
     private List<TodoItem> todoitemCollection;
     private String title;
     
+    public TodoList(int id, String title, List todoItems) {
+        this(title, todoItems);
+        this.id = id;
+    }
+    
     public TodoList(String title, List todoItems) {
         this.title = title;
         this.todoitemCollection = todoItems;
@@ -27,6 +32,10 @@ public class TodoList {
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTodoitemCollection(List<TodoItem> todoitemCollection) {

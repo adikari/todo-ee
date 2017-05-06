@@ -14,6 +14,11 @@ public class TodoItem {
         this.iscomplete = iscomplete;
     }
     
+    public TodoItem(int id, String title, boolean iscomplete) {
+        this(title, iscomplete);
+        this.id = id;
+    }
+    
     public TodoItem(String title) {
         this(title, false);
     }
