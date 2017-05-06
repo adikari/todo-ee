@@ -8,24 +8,29 @@ import java.util.List;
  * @author subash
  */
 public class TodoList {
-    private List<TodoItem> todoItems;
+    private int id;
+    private List<TodoItem> todoitemCollection;
     private String title;
     
     public TodoList(String title, List todoItems) {
         this.title = title;
-        this.todoItems = todoItems;
+        this.todoitemCollection = todoItems;
     }
    
     public TodoList(String title) {
         this(title, new ArrayList());
     }
     
-    public List<TodoItem> getTodoItems() {
-        return todoItems;
+    public List<TodoItem> getTodoitemCollection() {
+        return todoitemCollection;
     }
 
-    public void setTodoItems(List<TodoItem> todoItems) {
-        this.todoItems = todoItems;
+    public int getId() {
+        return id;
+    }
+
+    public void setTodoitemCollection(List<TodoItem> todoitemCollection) {
+        this.todoitemCollection = todoitemCollection;
     }
 
     public String getTitle() {

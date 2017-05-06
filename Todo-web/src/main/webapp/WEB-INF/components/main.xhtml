@@ -50,7 +50,7 @@
             </div>
 
             <ul>
-                <ui:repeat value="#{todoBean.selectedList.todoItems}" var="todoItem">
+                <ui:repeat value="#{todoBean.selectedList.todoitemCollection}" var="todoItem">
                     <ui:include src="todoitem.xhtml" />
                 </ui:repeat>
             </ul>

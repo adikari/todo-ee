@@ -5,16 +5,21 @@ package au.com.subash.entity;
  * @author subash
  */
 public class TodoItem {
+    private int id;
     private String title;
-    private boolean isComplete;
+    private boolean iscomplete;
     
-    public TodoItem(String title, boolean isComplete) {
+    public TodoItem(String title, boolean iscomplete) {
         this.title = title;
-        this.isComplete = isComplete;
+        this.iscomplete = iscomplete;
     }
     
     public TodoItem(String title) {
         this(title, false);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -25,11 +30,11 @@ public class TodoItem {
         this.title = title;
     }
 
-    public boolean getIsComplete() {
-        return isComplete;
+    public boolean getIscomplete() {
+        return iscomplete;
     }
 
-    public void setIsComplete(boolean isComplete) {
-        this.isComplete = isComplete;
+    public void setIscomplete(boolean iscomplete) {
+        this.iscomplete = iscomplete;
     }
 }
