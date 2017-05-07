@@ -72,6 +72,10 @@ ul.side-nav.fixed li.logo {
     background: #ffffff;
 }
 
+.list ul li.complete {
+    background: #eaeded;
+}
+
 .list ul li .item {
     padding: 10px;
     position: relative;

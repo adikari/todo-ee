@@ -7,11 +7,11 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <li>
+    <li class="#{todoItem.iscomplete ? 'complete' : ''}">
         <div class="item">
             <h:form id="todoItemStatus">
                 <h:selectBooleanCheckbox class="filled-in" id="todo-item" value="#{todoItem.iscomplete}" >
-                    <f:ajax listener="#{todoBean.toogleTodoItem(todoItem)}" />
+                    <f:ajax listener="#{todoBean.toogleTodoItem(todoItem)}" render="main" />
                 </h:selectBooleanCheckbox>
                 
                 <h:outputLabel for="todo-item" value="#{todoItem.title}" >
