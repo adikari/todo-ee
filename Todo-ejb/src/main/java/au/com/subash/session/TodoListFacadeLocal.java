@@ -10,8 +10,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface TodoListFacadeLocal {
+    Todolist find(int id);
     List<Todolist> getAll();
     boolean remove(int id);
-    boolean create(Todolist list);
+    int create(Todolist list);
     boolean update(Todolist list);
 }

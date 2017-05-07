@@ -12,7 +12,7 @@ import javax.ejb.Remote;
 @Remote
 public interface ManageTodoListFacadeRemote {
     List<TodoList> getTodoLists();
-    boolean addTodoList(TodoList list);
+    int addTodoList(TodoList list);
     boolean removeTodoList(int id);
     boolean updateTodoList(TodoList list);
     boolean updateTodoItem(TodoItem item);

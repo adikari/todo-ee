@@ -40,7 +40,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     }
 
     @Override
-    public boolean addTodoList(TodoList list) {
+    public int addTodoList(TodoList list) {
         return todoListFacade.create(todoListDTO2DAO(list));
     }
 

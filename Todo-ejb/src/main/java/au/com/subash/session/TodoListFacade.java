@@ -1,7 +1,6 @@
 package au.com.subash.session;
 
 import au.com.subash.entity.Todolist;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -19,6 +18,16 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
     @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Todolist find(int id) {
+        return em.find(Todolist.class, id);
+    }
 
     @Override
     public List<Todolist> getAll() {
@@ -29,16 +38,32 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
     @Override
     public boolean remove(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Todolist found = find(id);
+        
+        if (null != found) {
+            em.remove(id);
+            return true;
+        }
+               
+        return false;
     }
 
     @Override
-    public boolean create(Todolist list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int create(Todolist list) {
+        em.persist(list);
+        em.flush();
+        return list.getId();
     }
 
     @Override
     public boolean update(Todolist list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Todolist found = find(list.getId());
+        
+        if (null != found) {
+            em.merge(list);
+            return true;
+        }
+
+        return false;
     }
 }

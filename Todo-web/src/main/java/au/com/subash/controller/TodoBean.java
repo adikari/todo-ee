@@ -66,7 +66,7 @@ public class TodoBean implements Serializable {
      */
     public void setSelectedList(TodoList selectedList) {       
         this.selectedList = todoLists.stream()
-                .filter(l -> l.getTitle().equals(selectedList.getTitle()))
+                .filter(l -> l.getId() == selectedList.getId())
                 .findFirst()
                 .get();
     }
@@ -95,9 +95,10 @@ public class TodoBean implements Serializable {
     public void addTodoList() {
         selectedList = new TodoList("Untitled");
         
-        if (facade.addTodoList(selectedList)) {
-            todoLists.add(selectedList);
-        }
+        int id = facade.addTodoList(selectedList);
+
+        selectedList.setId(id);
+        todoLists.add(selectedList);        
     }
     
     /**
