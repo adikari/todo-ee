@@ -25,7 +25,12 @@ public class TodoBean implements Serializable {
     private TodoList selectedList;
     private String newTodoItem;
 
-
+    @PostConstruct
+    public void init() {
+        todoLists = facade.getTodoLists();
+        
+        selectedList = todoLists.get(0);
+    }
 
     /**
      * Get all lists
@@ -33,7 +38,7 @@ public class TodoBean implements Serializable {
      * @return TodoLists
      */
     public List<TodoList> getTodoLists() {
-        return facade.getTodoLists();
+        return todoLists;
     }
 
     /**
@@ -89,8 +94,10 @@ public class TodoBean implements Serializable {
      */
     public void addTodoList() {
         selectedList = new TodoList("Untitled");
-        todoLists.add(selectedList);
-        facade.addTodoList(selectedList);
+        
+        if (facade.addTodoList(selectedList)) {
+            todoLists.add(selectedList);
+        }
     }
     
     /**
@@ -100,9 +107,10 @@ public class TodoBean implements Serializable {
         if (null == newTodoItem || newTodoItem.isEmpty()) { 
             return; 
         }
-        
-        selectedList.getTodoitemCollection().add(new TodoItem(newTodoItem));
-        facade.updateTodoList(selectedList);
+         
+        if (facade.updateTodoList(selectedList)) {
+            selectedList.getTodoitemCollection().add(new TodoItem(newTodoItem));
+        }
         
         setNewTodoItem(null);
     } 
@@ -112,8 +120,12 @@ public class TodoBean implements Serializable {
      * 
      */
     public void removeTodoList() {
+
+        if (!facade.removeTodoList(selectedList.getId())) {
+            return;
+        }
+        
         todoLists.remove(selectedList);
-        facade.removeTodoList(selectedList.getId());
         
         if (todoLists.size() > 0) {
             selectedList = todoLists.get(0);
