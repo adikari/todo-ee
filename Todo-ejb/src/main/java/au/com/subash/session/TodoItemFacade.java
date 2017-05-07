@@ -1,6 +1,7 @@
 package au.com.subash.session;
 
 import au.com.subash.entity.Todoitem;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
  * @author subash
  */
 @Stateless
+@LocalBean
 public class TodoItemFacade implements TodoItemFacadeLocal {
     
     @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")

@@ -1,7 +1,9 @@
 package au.com.subash.session;
 
 import au.com.subash.entity.Todolist;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,6 +13,7 @@ import javax.persistence.PersistenceContext;
  * @author subash
  */
 @Stateless
+@LocalBean
 public class TodoListFacade implements TodoListFacadeLocal {
 
     @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
@@ -18,7 +21,8 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
     @Override
     public List<Todolist> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

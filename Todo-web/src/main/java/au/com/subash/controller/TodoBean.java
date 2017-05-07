@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 /**
@@ -24,11 +25,7 @@ public class TodoBean implements Serializable {
     private TodoList selectedList;
     private String newTodoItem;
 
-    public TodoBean() {
-        todoLists = facade.getTodoLists();
-        
-        selectedList = todoLists.get(0);
-    }
+
 
     /**
      * Get all lists
@@ -36,7 +33,7 @@ public class TodoBean implements Serializable {
      * @return TodoLists
      */
     public List<TodoList> getTodoLists() {
-        return todoLists;
+        return facade.getTodoLists();
     }
 
     /**
