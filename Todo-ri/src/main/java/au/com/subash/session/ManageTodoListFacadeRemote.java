@@ -39,7 +39,7 @@ public interface ManageTodoListFacadeRemote {
      * @param list List to update
      * @return Success or failure
      */
-    boolean updateTodoList(TodoList list);
+    TodoList updateTodoList(TodoList list);
     
     /**
      * Update Item

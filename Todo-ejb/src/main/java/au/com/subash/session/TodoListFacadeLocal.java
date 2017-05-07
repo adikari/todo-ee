@@ -47,5 +47,5 @@ public interface TodoListFacadeLocal {
      * @param list List to update
      * @return Success or failure
      */
-    boolean update(Todolist list);
+    Todolist update(Todolist list);
 }

@@ -53,8 +53,10 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     }
 
     @Override
-    public boolean updateTodoList(TodoList list) {
-        return todoListFacade.update(todoListDTO2DAO(list));
+    public TodoList updateTodoList(TodoList list) {
+        Todolist updatedList = todoListFacade.update(todoListDTO2DAO(list));
+        
+        return todoListDAO2DTO(updatedList);
     }
     
     /**

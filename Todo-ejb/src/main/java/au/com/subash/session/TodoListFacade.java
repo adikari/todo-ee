@@ -56,14 +56,15 @@ public class TodoListFacade implements TodoListFacadeLocal {
     }
 
     @Override
-    public boolean update(Todolist list) {
+    public Todolist update(Todolist list) {
         Todolist found = find(list.getId());
         
         if (null != found) {
             em.merge(list);
-            return true;
+            em.flush();
+            return found;
         }
 
-        return false;
+        return null;
     }
 }

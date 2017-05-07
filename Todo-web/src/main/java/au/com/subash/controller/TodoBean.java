@@ -110,11 +110,15 @@ public class TodoBean implements Serializable {
         }
         
         TodoItem item = new TodoItem(newTodoItem, selectedList.getId());
+        
         selectedList.getTodoitemCollection().add(item);
         
-        updateSelectedList();
+        TodoList updateList = updateSelectedList();
         
-        setNewTodoItem(null);
+        if (null != updateList) {
+            selectedList = updateList;
+            setNewTodoItem(null);
+        } 
     } 
     
     /**
@@ -122,7 +126,7 @@ public class TodoBean implements Serializable {
      * 
      * @return boolean
      */
-    public boolean updateSelectedList() {
+    public TodoList updateSelectedList() {
         return facade.updateTodoList(selectedList);
     }
     
