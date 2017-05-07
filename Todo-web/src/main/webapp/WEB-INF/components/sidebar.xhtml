@@ -21,7 +21,16 @@
 
             <h:panelGroup id="lists">
                 <ui:repeat value="#{todoBean.todoLists}" var="todoList">
-                    <ui:include src="list.xhtml" />
+                    <li class="bold #{todoBean.isSelectedList(todoList) ? 'active' : ''}">
+                        <h:commandLink 
+                            class="waves-effect waves-teal" 
+                            value="#{todoList.title}">
+                            <f:ajax 
+                                execute="@form" 
+                                render=":main :sidebar:lists" 
+                                listener="#{todoBean.setSelectedList(todoList)}" />
+                        </h:commandLink>
+                    </li>
                 </ui:repeat>
             </h:panelGroup>
         </ul>

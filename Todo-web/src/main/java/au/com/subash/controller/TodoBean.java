@@ -156,4 +156,14 @@ public class TodoBean implements Serializable {
 
         facade.updateTodoItem(item);
     }
+    
+    /**
+     * Check if list is currently selected
+     * 
+     * @param list
+     * @return boolean 
+     */
+    public boolean isSelectedList(TodoList list) {
+        return selectedList.getId() == list.getId();
+    }
 }
