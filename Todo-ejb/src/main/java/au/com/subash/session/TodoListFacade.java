@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,8 +22,9 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
     @Override
     public List<Todolist> getAll() {
-        return new ArrayList();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
+        
+        return query.getResultList();
     }
 
     @Override
