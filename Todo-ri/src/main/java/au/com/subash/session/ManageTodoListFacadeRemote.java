@@ -11,9 +11,41 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ManageTodoListFacadeRemote {
+    /**
+     * Get all lists
+     * @return All found lists
+     */
     List<TodoList> getTodoLists();
+    
+    /**
+     * Add a new list
+     * 
+     * @param list List to add
+     * @return Added list
+     */
     TodoList addTodoList(TodoList list);
+    
+    /**
+     * Remove list
+     * 
+     * @param id Id of list to remove
+     * @return Success and failure
+     */
     boolean removeTodoList(int id);
+    
+    /**
+     * Update list
+     * 
+     * @param list List to update
+     * @return Success or failure
+     */
     boolean updateTodoList(TodoList list);
+    
+    /**
+     * Update Item
+     * 
+     * @param item Item to update
+     * @return Success or failure
+     */
     boolean updateTodoItem(TodoItem item);
 }
