@@ -36,7 +36,13 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
 
     @Override
     public boolean updateTodoItem(TodoItem item) {
-        return todoItemFacade.update(todoItemDTO2DAO(item));
+        Todolist list = todoListFacade.find(item.getTodolistid());
+        
+        if (null == list) {
+            return false;
+        }
+        
+        return todoItemFacade.update(todoItemDTO2DAO(item, list));
     }
 
     @Override
@@ -65,11 +71,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
         Todolist dao = new Todolist(list.getId(), list.getTitle());
         
         List<Todoitem> items = list.getTodoitemCollection().stream()
-                .map((TodoItem t) -> {
-                    Todoitem item = todoItemDTO2DAO(t);
-                    item.setTodolistid(dao);
-                    return item;
-                })
+                .map(item -> todoItemDTO2DAO(item, dao))
                 .collect(Collectors.toList());
         
         dao.setTodoitemCollection(items);
@@ -120,11 +122,14 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
      * @param item Item DTO
      * @return Item DAO
      */
-    private Todoitem todoItemDTO2DAO(TodoItem item) {
+    private Todoitem todoItemDTO2DAO(TodoItem item, Todolist list) {
         if (null == item) {
             return null;
         }
         
-        return new Todoitem(item.getId(), item.getTitle(), item.getIscomplete()); 
+        Todoitem dao = new Todoitem(item.getId(), item.getTitle(), item.getIscomplete()); 
+        dao.setTodolistid(list);
+        
+        return dao;
     }
 }
