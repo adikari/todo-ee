@@ -18,6 +18,7 @@
                                      required="true" 
                                      label="text">
                             <p:ajax event="change" 
+                                    listener="#{todoBean.updateSelectedList}"
                                     oncomplete="$('.ui-inplace-save').click();" 
                                     update=":sidebar:lists" />
                         </p:inputText>

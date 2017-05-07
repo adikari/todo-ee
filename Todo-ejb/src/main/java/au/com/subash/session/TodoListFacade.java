@@ -41,7 +41,7 @@ public class TodoListFacade implements TodoListFacadeLocal {
         Todolist found = find(id);
         
         if (null != found) {
-            em.remove(id);
+            em.remove(found);
             return true;
         }
                

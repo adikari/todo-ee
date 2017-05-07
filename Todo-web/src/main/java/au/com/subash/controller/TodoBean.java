@@ -109,12 +109,21 @@ public class TodoBean implements Serializable {
             return; 
         }
          
-        if (facade.updateTodoList(selectedList)) {
+        if (updateSelectedList()) {
             selectedList.getTodoitemCollection().add(new TodoItem(newTodoItem));
         }
         
         setNewTodoItem(null);
     } 
+    
+    /**
+     * Edit title of selected list
+     * 
+     * @return boolean
+     */
+    public boolean updateSelectedList() {
+        return facade.updateTodoList(selectedList);
+    }
     
     /**
      * Remove selected list. This will remove all its items
