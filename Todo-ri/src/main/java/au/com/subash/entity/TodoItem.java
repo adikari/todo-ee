@@ -8,19 +8,31 @@ public class TodoItem {
     private int id;
     private String title;
     private boolean iscomplete;
+    private int todolistid;
     
-    public TodoItem(String title, boolean iscomplete) {
+    public TodoItem(int id, String title, int todolistId, boolean iscomplete) {
+        this.id = id;
         this.title = title;
         this.iscomplete = iscomplete;
+        this.todolistid = todolistId;
     }
     
-    public TodoItem(int id, String title, boolean iscomplete) {
-        this(title, iscomplete);
-        this.id = id;
+    public TodoItem(int id, String title, int todolistId) {
+        this(id, title, todolistId, false);
     }
     
-    public TodoItem(String title) {
-        this(title, false);
+    public TodoItem(String title, int todolistId) {
+        this.title = title;
+        this.todolistid = todolistId;
+        this.iscomplete = false;
+    }
+
+    public int getTodolistid() {
+        return todolistid;
+    }
+
+    public void setTodolistid(int todolistid) {
+        this.todolistid = todolistid;
     }
 
     public int getId() {

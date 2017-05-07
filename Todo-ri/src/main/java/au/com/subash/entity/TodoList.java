@@ -33,10 +33,6 @@ public class TodoList {
     public int getId() {
         return id;
     }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setTodoitemCollection(List<TodoItem> todoitemCollection) {
         this.todoitemCollection = todoitemCollection;

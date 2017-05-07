@@ -49,10 +49,10 @@ public class TodoListFacade implements TodoListFacadeLocal {
     }
 
     @Override
-    public int create(Todolist list) {
+    public Todolist create(Todolist list) {
         em.persist(list);
         em.flush();
-        return list.getId();
+        return list;
     }
 
     @Override

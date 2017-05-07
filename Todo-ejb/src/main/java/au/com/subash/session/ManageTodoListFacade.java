@@ -40,8 +40,10 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     }
 
     @Override
-    public int addTodoList(TodoList list) {
-        return todoListFacade.create(todoListDTO2DAO(list));
+    public TodoList addTodoList(TodoList list) {
+        Todolist addedList = todoListFacade.create(todoListDTO2DAO(list));
+        
+        return todoListDAO2DTO(addedList);
     }
 
     @Override
@@ -99,7 +101,12 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
             return null;
         }
         
-        return new TodoItem(item.getId(), item.getTitle(), item.getIscomplete());
+        return new TodoItem(
+                item.getId(), 
+                item.getTitle(),
+                item.getTodolistid().getId(),
+                item.getIscomplete()
+        );
     }
 
     /**

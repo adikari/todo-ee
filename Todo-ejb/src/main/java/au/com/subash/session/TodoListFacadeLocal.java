@@ -13,6 +13,6 @@ public interface TodoListFacadeLocal {
     Todolist find(int id);
     List<Todolist> getAll();
     boolean remove(int id);
-    int create(Todolist list);
+    Todolist create(Todolist list);
     boolean update(Todolist list);
 }

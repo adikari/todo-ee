@@ -93,12 +93,12 @@ public class TodoBean implements Serializable {
      * Add new list
      */
     public void addTodoList() {
-        selectedList = new TodoList("Untitled");
-        
-        int id = facade.addTodoList(selectedList);
+        TodoList list = facade.addTodoList(new TodoList("Untitled"));
 
-        selectedList.setId(id);
-        todoLists.add(selectedList);        
+        if (null != list) {
+            selectedList = list;
+            todoLists.add(selectedList);
+        }       
     }
     
     /**
@@ -108,10 +108,11 @@ public class TodoBean implements Serializable {
         if (null == newTodoItem || newTodoItem.isEmpty()) { 
             return; 
         }
-         
-        if (updateSelectedList()) {
-            selectedList.getTodoitemCollection().add(new TodoItem(newTodoItem));
-        }
+        
+        TodoItem item = new TodoItem(newTodoItem, selectedList.getId());
+        selectedList.getTodoitemCollection().add(item);
+        
+        updateSelectedList();
         
         setNewTodoItem(null);
     } 
