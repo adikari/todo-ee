@@ -95,3 +95,5 @@ ul.side-nav.fixed li.logo {
     text-align: center;
     font-weight: bold;
 }
+
+form a.delete { color: #26a69a; }
