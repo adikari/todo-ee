@@ -13,12 +13,24 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class TodoItemFacade implements TodoItemFacadeLocal {
-    
+
     @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
-    
+
+    @Override
+    public Todoitem find(int id) {
+        return em.find(Todoitem.class, id);
+    }
+
     @Override
     public boolean update(Todoitem item) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Todoitem found = find(item.getId());
+        
+        if (null != found) {
+            em.merge(item);
+            return true;
+        }
+
+        return false;
     }
 }
