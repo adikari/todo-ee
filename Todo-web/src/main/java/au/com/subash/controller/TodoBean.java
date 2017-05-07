@@ -155,7 +155,9 @@ public class TodoBean implements Serializable {
                 .filter(t -> t.getTitle().equals(todoItem.getTitle()))
                 .findFirst().get();
 
-        facade.updateTodoItem(item);
+        if (!facade.updateTodoItem(item)) {
+            item.setIscomplete(!item.getIscomplete());
+        }
     }
     
     /**
