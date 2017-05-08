@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -42,6 +44,9 @@ public class Todolist implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "TITLE")
     private String title;
+    @JoinColumn(name = "APPUSER", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Appuser appuser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid")
     private Collection<Todoitem> todoitemCollection;
 
@@ -71,6 +76,14 @@ public class Todolist implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Appuser getAppuser() {
+        return appuser;
+    }
+
+    public void setAppuser(Appuser appuser) {
+        this.appuser = appuser;
     }
 
     @XmlTransient
