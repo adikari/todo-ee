@@ -1,5 +1,7 @@
 package au.com.subash.session;
 
+import au.com.subash.entity.AppUser;
+import au.com.subash.entity.Appuser;
 import au.com.subash.entity.TodoItem;
 import au.com.subash.entity.TodoList;
 import au.com.subash.entity.Todoitem;
@@ -68,6 +70,31 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
         Todolist updatedList = todoListFacade.update(todoListDTO2DAO(list));
         
         return todoListDAO2DTO(updatedList);
+    }
+    
+    @Override
+    public AppUser getUser() {
+        return userDAO2DTO(userFacade.getUser());
+    }
+    
+    /**
+     * Convert user DAO to DTO
+     * 
+     * @param user Logged in user
+     * @return User DTO
+     */
+    private AppUser userDAO2DTO(Appuser user) {
+        if (null == user) {
+            return null;
+        }
+        
+        return new AppUser(
+            user.getId(),
+            user.getEmail(),
+            user.getFirstname(),
+            user.getLastname(),
+            user.getCategory()
+        );
     }
     
     /**

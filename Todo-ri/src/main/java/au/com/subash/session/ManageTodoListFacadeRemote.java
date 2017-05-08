@@ -1,5 +1,6 @@
 package au.com.subash.session;
 
+import au.com.subash.entity.AppUser;
 import au.com.subash.entity.TodoItem;
 import au.com.subash.entity.TodoList;
 import java.util.List;
@@ -11,6 +12,14 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ManageTodoListFacadeRemote {
+    
+    /**
+     * Get logged in user
+     * 
+     * @return Logged in user
+     */
+    AppUser getUser();
+    
     /**
      * Get all lists
      * @return All found lists
