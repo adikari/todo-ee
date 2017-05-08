@@ -88,6 +88,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
                 .collect(Collectors.toList());
         
         dao.setTodoitemList(items);
+        dao.setAppuser(userFacade.getUser());
         
         return dao;
     }
