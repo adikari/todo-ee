@@ -54,5 +54,8 @@ public class AppUser {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    public String getFullname() {
+        return firstname + " " + lastname;
+    }
 }
