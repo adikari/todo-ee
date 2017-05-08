@@ -1,5 +1,6 @@
 package au.com.subash.controller;
 
+import au.com.subash.entity.AppUser;
 import au.com.subash.entity.TodoItem;
 import au.com.subash.entity.TodoList;
 import au.com.subash.session.ManageTodoListFacadeRemote;
@@ -24,9 +25,11 @@ public class TodoBean implements Serializable {
     private List<TodoList> todoLists;
     private TodoList selectedList;
     private String newTodoItem;
+    private AppUser user;
 
     @PostConstruct
     public void init() {
+        user = facade.getUser();
         todoLists = facade.getTodoLists();
         
         if (todoLists.size() > 0) {
@@ -34,6 +37,15 @@ public class TodoBean implements Serializable {
         } else {
             addTodoList();
         }
+    }
+
+    /**
+     * Get logged in user
+     * 
+     * @return Logged in user
+     */
+    public AppUser getUser() {
+        return user;
     }
 
     /**
