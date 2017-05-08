@@ -8,15 +8,26 @@
     <h:form id="sidebar">
 
         <ul id="nav-mobile" class="side-nav fixed">
-            <li class="logo">
-                <h2><i class="small material-icons">business</i> Todo</h2>
-            </li>
 
+            <li>
+                <div class="userView">
+                    <div class="background indigo"></div>
+                    <h:commandLink value="Logout" class="white-text right" action="#{authBean.logout()}"/> 
+                    <img class="circle" src="https://robohash.org/#{todoBean.user.firstname}?set=set2" />
+                    <span class="white-text bold name">#{todoBean.user.fullname}</span>
+                    <span class="white-text email">#{todoBean.user.email}</span>
+                </div>
+            </li>
+            
             <li>
                 <h:commandLink title="Add new todo list" class="btn indigo waves-effect waves-light">
                     Add new list<i class="material-icons right">add</i>
                     <f:ajax execute="@form" render="lists main" listener="#{todoBean.addTodoList}" />
                 </h:commandLink>
+            </li>
+            
+            <li>
+                <div class="divider"></div>
             </li>
 
             <h:panelGroup id="lists">
