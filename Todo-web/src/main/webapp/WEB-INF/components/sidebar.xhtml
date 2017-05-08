@@ -9,11 +9,11 @@
 
         <ul id="nav-mobile" class="side-nav fixed">
             <li class="logo">
-                <h2>Todo</h2>
+                <h2><i class="small material-icons">business</i> Todo</h2>
             </li>
 
             <li>
-                <h:commandLink title="Add new todo list" class="btn waves-effect waves-light">
+                <h:commandLink title="Add new todo list" class="btn indigo waves-effect waves-light">
                     Add new list<i class="material-icons right">add</i>
                     <f:ajax execute="@form" render="lists main" listener="#{todoBean.addTodoList}" />
                 </h:commandLink>
