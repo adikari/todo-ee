@@ -1,7 +1,7 @@
 package au.com.subash.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class Todolist implements Serializable {
     @ManyToOne(optional = false)
     private Appuser appuser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid")
-    private Collection<Todoitem> todoitemCollection;
+    private List<Todoitem> todoitemList;
 
     public Todolist() {
     }
@@ -87,12 +87,12 @@ public class Todolist implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Todoitem> getTodoitemCollection() {
-        return todoitemCollection;
+    public List<Todoitem> getTodoitemList() {
+        return todoitemList;
     }
 
-    public void setTodoitemCollection(Collection<Todoitem> todoitemCollection) {
-        this.todoitemCollection = todoitemCollection;
+    public void setTodoitemList(List<Todoitem> todoitemList) {
+        this.todoitemList = todoitemList;
     }
 
     @Override

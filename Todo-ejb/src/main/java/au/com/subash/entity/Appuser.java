@@ -1,7 +1,7 @@
 package au.com.subash.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Appuser.findByFirstname", query = "SELECT a FROM Appuser a WHERE a.firstname = :firstname")
     , @NamedQuery(name = "Appuser.findByLastname", query = "SELECT a FROM Appuser a WHERE a.lastname = :lastname")
     , @NamedQuery(name = "Appuser.findByEmail", query = "SELECT a FROM Appuser a WHERE a.email = :email")
-    , @NamedQuery(name = "Appuser.findByPassword", query = "SELECT a FROM Appuser a WHERE a.password = :password")})
+    , @NamedQuery(name = "Appuser.findByPassword", query = "SELECT a FROM Appuser a WHERE a.password = :password")
+    , @NamedQuery(name = "Appuser.findByCategory", query = "SELECT a FROM Appuser a WHERE a.category = :category")})
 public class Appuser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,8 +62,13 @@ public class Appuser implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "PASSWORD")
     private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "CATEGORY")
+    private String category;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appuser")
-    private Collection<Todolist> todolistCollection;
+    private List<Todolist> todolistList;
 
     public Appuser() {
     }
@@ -71,12 +77,13 @@ public class Appuser implements Serializable {
         this.id = id;
     }
 
-    public Appuser(Integer id, String firstname, String lastname, String email, String password) {
+    public Appuser(Integer id, String firstname, String lastname, String email, String password, String category) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -119,13 +126,21 @@ public class Appuser implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
-    public Collection<Todolist> getTodolistCollection() {
-        return todolistCollection;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTodolistCollection(Collection<Todolist> todolistCollection) {
-        this.todolistCollection = todolistCollection;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @XmlTransient
+    public List<Todolist> getTodolistList() {
+        return todolistList;
+    }
+
+    public void setTodolistList(List<Todolist> todolistList) {
+        this.todolistList = todolistList;
     }
 
     @Override

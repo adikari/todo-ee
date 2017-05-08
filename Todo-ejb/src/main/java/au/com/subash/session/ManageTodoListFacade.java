@@ -6,6 +6,8 @@ import au.com.subash.entity.Todoitem;
 import au.com.subash.entity.Todolist;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -14,6 +16,7 @@ import javax.ejb.Stateless;
  * @author subash
  */
 @Stateless
+@DeclareRoles({"USER"})
 public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     
     @EJB
@@ -21,20 +24,26 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     
     @EJB
     private TodoItemFacade todoItemFacade;
+    
+    @EJB
+    private UserFacade userFacade;
 
     @Override
+    @RolesAllowed({"USER"})
     public List<TodoList> getTodoLists() {
-        return todoListFacade.getAll().stream()
+        return userFacade.getTodolists().stream()
                 .map(t -> this.todoListDAO2DTO(t))
                 .collect(Collectors.toList());
     }
 
     @Override
+    @RolesAllowed({"USER"})
     public boolean removeTodoList(int id) {
         return todoListFacade.remove(id);
     }
 
     @Override
+    @RolesAllowed({"USER"})
     public boolean updateTodoItem(TodoItem item) {
         Todolist list = todoListFacade.find(item.getTodolistid());
         
@@ -46,6 +55,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     }
 
     @Override
+    @RolesAllowed({"USER"})
     public TodoList addTodoList(TodoList list) {
         Todolist addedList = todoListFacade.create(todoListDTO2DAO(list));
         
@@ -53,6 +63,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     }
 
     @Override
+    @RolesAllowed({"USER"})
     public TodoList updateTodoList(TodoList list) {
         Todolist updatedList = todoListFacade.update(todoListDTO2DAO(list));
         
@@ -76,7 +87,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
                 .map(item -> todoItemDTO2DAO(item, dao))
                 .collect(Collectors.toList());
         
-        dao.setTodoitemCollection(items);
+        dao.setTodoitemList(items);
         
         return dao;
     }
@@ -92,7 +103,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
             return null;
         }
         
-        List<TodoItem> todoitemCollection = list.getTodoitemCollection().stream()
+        List<TodoItem> todoitemCollection = list.getTodoitemList().stream()
                 .map(t -> todoItemDAO2DTO(t))
                 .collect(Collectors.toList());
         

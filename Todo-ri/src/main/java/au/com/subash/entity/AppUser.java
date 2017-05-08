@@ -10,13 +10,15 @@ public class AppUser {
     private String firstname;
     private String lastname;
     private String password;
+    private String category;
 
-    public AppUser(int id, String email, String firstname, String lastname, String password) {
+    public AppUser(int id, String email, String firstname, String lastname, String password, String category) {
         this.id = id;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
+        this.category = category;
     }
 
     public int getId() {
@@ -53,6 +55,14 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     
     public String getFullname() {

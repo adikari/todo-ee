@@ -29,7 +29,11 @@ public class TodoBean implements Serializable {
     public void init() {
         todoLists = facade.getTodoLists();
         
-        selectedList = todoLists.get(0);
+        if (todoLists.size() > 0) {
+            selectedList = todoLists.get(0);
+        } else {
+            addTodoList();
+        }
     }
 
     /**

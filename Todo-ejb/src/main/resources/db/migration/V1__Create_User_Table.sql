@@ -5,5 +5,6 @@ create table APPUSER (
     FIRSTNAME varchar(100) not null,
     LASTNAME varchar(100) not null,
     EMAIL varchar(100) not null,
-    PASSWORD varchar(100) not null
+    PASSWORD varchar(100) not null,
+    CATEGORY varchar(100) not null
 );
