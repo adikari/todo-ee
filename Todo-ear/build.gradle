@@ -1,16 +1,53 @@
-apply plugin: 'ear'
+apply plugin: "ear"
 
-description = 'Todo-ear'
+description = "Todo-ear"
+
 
 dependencies {
-  deploy project(':Todo-ejb')
-  deploy project(path: ':Todo-web', configuration: 'archives')
+  deploy project(":Todo-ejb")
+  deploy project(path: ":Todo-web", configuration: "archives")
 
-  add ('earlib', project(':Todo-ri')) {
+  add ("earlib", project(":Todo-ri")) {
     transitive = false
   }
 }
 
-ear {
+build.doLast {
+  run
+}
 
+task run(dependsOn: ["ear"], type: Exec) {
+  commandLine "asadmin"
+
+  args "deploy", "--force=true", "${ear.archivePath}"
+
+  standardOutput = new ByteArrayOutputStream()
+
+  ext.output = {
+    return standardOutput.toString()
+  }
+}
+
+task startServer(dependsOn: "startDatabase", type: Exec) {
+  commandLine "asadmin"
+
+  args "start-domain", "domain1"
+
+  standardOutput = new ByteArrayOutputStream()
+
+  ext.output = {
+    return standardOutput.toString()
+  }
+}
+
+task startDatabase(type: Exec) {
+  commandLine "asadmin"
+
+  args "start-database", "--dbhome=~/.netbeans-derby/todo/"
+
+  standardOutput = new ByteArrayOutputStream()
+
+  ext.output = {
+    return standardOutput.toString()
+  }
 }
