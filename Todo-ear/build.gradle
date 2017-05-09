@@ -2,6 +2,9 @@ apply plugin: "ear"
 
 description = "Todo-ear"
 
+def dbhome = "/Users/subash/.netbeans-derby"
+def domain = "domain1"
+def asadminBin = "/Applications/NetBeans/glassfish-4.1.1/glassfish/bin"
 
 dependencies {
   deploy project(":Todo-ejb")
@@ -12,11 +15,10 @@ dependencies {
   }
 }
 
-build.doLast {
-  run
-}
+task run(dependsOn: ["startServer", "ear"], type: Exec) {
+  group = 'Build'
+  description = 'Build ear and deploy to glassfish server'
 
-task run(dependsOn: ["ear"], type: Exec) {
   commandLine "asadmin"
 
   args "deploy", "--force=true", "${ear.archivePath}"
@@ -28,10 +30,35 @@ task run(dependsOn: ["ear"], type: Exec) {
   }
 }
 
-task startServer(dependsOn: "startDatabase", type: Exec) {
+task startServer(dependsOn: "startDb", type: Exec) {
+  group = 'Build Setup'
+  description = 'Start glassfish server'
+
+  ignoreExitValue true
+
+  commandLine "${asadminBin}/asadmin"
+  args "start-domain", "${domain}"
+
+  standardOutput = new ByteArrayOutputStream()
+
+  ext.output = {
+    return standardOutput.toString()
+  }
+
+  doLast {
+    if(execResult.exitValue == 1) {
+      logger.info(startServer.output())
+    }
+  }
+}
+
+task startDb(type: Exec) {
+  group = 'Build Setup'
+  description = 'Start derby database'
+
   commandLine "asadmin"
 
-  args "start-domain", "domain1"
+  args "start-database", "--dbhome", dbhome
 
   standardOutput = new ByteArrayOutputStream()
 
@@ -40,14 +67,4 @@ task startServer(dependsOn: "startDatabase", type: Exec) {
   }
 }
 
-task startDatabase(type: Exec) {
-  commandLine "asadmin"
 
-  args "start-database", "--dbhome=~/.netbeans-derby/todo/"
-
-  standardOutput = new ByteArrayOutputStream()
-
-  ext.output = {
-    return standardOutput.toString()
-  }
-}
