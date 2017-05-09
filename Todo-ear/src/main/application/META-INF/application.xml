@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" version="6">
-  <display-name>Todo-ear</display-name>
+  <display-name>todo-rest</display-name>
   <module>
     <ejb>Todo-ejb-1.0.jar</ejb>
   </module>
   <module>
     <web>
       <web-uri>Todo-web-1.0.war</web-uri>
-      <context-root>/Todo-web</context-root>
+      <context-root>/todo-rest</context-root>
     </web>
   </module>
   <library-directory>lib</library-directory>
