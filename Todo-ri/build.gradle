@@ -1,0 +1,5 @@
+description = 'Todo-ri'
+
+dependencies {
+  compile(group: 'javax', name: 'javaee-api', version:'6.0')
+}

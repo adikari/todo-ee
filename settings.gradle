@@ -1,0 +1,11 @@
+rootProject.name = 'Todo'
+
+include ':Todo-ear'
+include ':Todo-web'
+include ':Todo-ejb'
+include ':Todo-ri'
+
+project(':Todo-ear').projectDir = "$rootDir/Todo-ear" as File
+project(':Todo-web').projectDir = "$rootDir/Todo-web" as File
+project(':Todo-ejb').projectDir = "$rootDir/Todo-ejb" as File
+project(':Todo-ri').projectDir = "$rootDir/Todo-ri" as File

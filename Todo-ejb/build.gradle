@@ -1,0 +1,8 @@
+description = 'Todo-ejb'
+
+dependencies {
+  compile project(':Todo-ri')
+  compile(group: 'org.eclipse.persistence', name: 'eclipselink', version:'2.5.2')
+  compile(group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa.modelgen.processor', version:'2.5.2')
+  compile(group: 'javax', name: 'javaee-api', version:'7.0')
+}

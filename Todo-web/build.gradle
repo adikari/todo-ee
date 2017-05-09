@@ -1,0 +1,10 @@
+apply plugin: 'war'
+
+jar.enabled = true
+description = 'Todo-web'
+
+dependencies {
+  compile group: 'org.primefaces', name: 'primefaces', version:'6.1'
+  compile project(':Todo-ri')
+  providedCompile group: 'javax', name: 'javaee-web-api', version:'7.0'
+}

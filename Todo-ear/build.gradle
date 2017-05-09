@@ -1,0 +1,7 @@
+description = 'Todo-ear'
+
+dependencies {
+  compile project(':Todo-ejb')
+  compile project(':Todo-web')
+  compile project(':Todo-ri')
+}
