@@ -1,7 +1,16 @@
+apply plugin: 'ear'
+
 description = 'Todo-ear'
 
 dependencies {
-  compile project(':Todo-ejb')
-  compile project(':Todo-web')
-  compile project(':Todo-ri')
+  deploy project(':Todo-ejb')
+  deploy project(path: ':Todo-web', configuration: 'archives')
+
+  add ('earlib', project(':Todo-ri')) {
+    transitive = false
+  }
+}
+
+ear {
+
 }

@@ -1,6 +1,5 @@
 apply plugin: 'war'
 
-jar.enabled = true
 description = 'Todo-web'
 
 dependencies {
