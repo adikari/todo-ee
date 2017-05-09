@@ -1,8 +1,27 @@
+apply plugin: "org.flywaydb.flyway"
+
 description = 'Todo-ejb'
+
+buildscript {
+  repositories {
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+
+  dependencies {
+    classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.2.0"
+    classpath "org.apache.derby:derbyclient:10.13.1.1"
+  }
+}
 
 dependencies {
   compile project(':Todo-ri')
   compile(group: 'org.eclipse.persistence', name: 'eclipselink', version:'2.5.2')
   compile(group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa.modelgen.processor', version:'2.5.2')
   compile(group: 'javax', name: 'javaee-api', version:'7.0')
+}
+
+flyway {
+  url = 'jdbc:derby://localhost:1527/todo'
+  user = 'todo'
+  password = 'todo'
 }
