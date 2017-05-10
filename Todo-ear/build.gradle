@@ -37,7 +37,7 @@ task startServer(dependsOn: "startDb", type: Exec) {
   ignoreExitValue true
 
   commandLine "${asadminBin}/asadmin"
-  args "start-domain", "${domain}"
+  args "start-domain", "--debug", "${domain}"
 
   standardOutput = new ByteArrayOutputStream()
 
