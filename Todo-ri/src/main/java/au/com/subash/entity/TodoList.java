@@ -11,21 +11,21 @@ public class TodoList {
     private int id;
     private List<TodoItem> todoitemCollection;
     private String title;
-    
-    public TodoList(int id, String title, List todoItems) {
+
+    public TodoList(int id, String title, List<TodoItem> todoItems) {
         this(title, todoItems);
         this.id = id;
     }
-    
-    public TodoList(String title, List todoItems) {
+
+    public TodoList(String title, List<TodoItem> todoItems) {
         this.title = title;
         this.todoitemCollection = todoItems;
     }
-   
+
     public TodoList(String title) {
-        this(title, new ArrayList());
+        this(title, new ArrayList<TodoItem>());
     }
-    
+
     public List<TodoItem> getTodoitemCollection() {
         return todoitemCollection;
     }
