@@ -3,7 +3,9 @@ apply plugin: 'war'
 description = 'Todo-web'
 
 dependencies {
-  compile group: 'org.primefaces', name: 'primefaces', version:'6.1'
+  compile 'org.primefaces:primefaces:6.1'
+  compile 'org.glassfish.jersey.core:jersey-client:2.25.1'
+
   compile project(':Todo-ri')
   providedCompile group: 'javax', name: 'javaee-web-api', version:'7.0'
 }
