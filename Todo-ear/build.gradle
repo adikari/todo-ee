@@ -47,7 +47,7 @@ task startServer(dependsOn: "startDb", type: Exec) {
 
   doLast {
     if(execResult.exitValue == 1) {
-      logger.info(startServer.output())
+      logger.warn(startServer.output())
     }
   }
 }
