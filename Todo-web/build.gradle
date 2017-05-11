@@ -9,8 +9,5 @@ dependencies {
 
   providedCompile 'javax:javaee-web-api:7.0',
                   "org.glassfish.jersey.core:jersey-common:${jerseyVersion}",
-                  "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
-                  "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
-                  "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
-                  "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${jacksonVersion}"
+                  "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
 }
