@@ -9,6 +9,11 @@ subprojects {
   apply plugin: 'java'
   apply plugin: 'eclipse'
 
+  ext {
+    jerseyVersion = '2.21'
+    jacksonVersion = '2.5.2'
+  }
+
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
 

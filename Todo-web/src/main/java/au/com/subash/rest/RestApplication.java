@@ -12,18 +12,9 @@ public class RestApplication extends Application {
   public Set<Class<?>> getClasses() {
     Set<Class<?>> resources = new java.util.HashSet<>();
 
-    addRestResourceClasses(resources);
+    resources.add(TodoListService.class);
+    // resources.add(JsonFeature.class);
 
     return resources;
-  }
-
-
-  /**
-   * Register resources
-   *
-   * @param resources Resources to register
-   */
-  private void addRestResourceClasses(Set<Class<?>> resources) {
-    resources.add(TodoListService.class);
   }
 }

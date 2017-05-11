@@ -3,9 +3,14 @@ apply plugin: 'war'
 description = 'Todo-web'
 
 dependencies {
-  compile 'org.primefaces:primefaces:6.1'
-  compile 'org.glassfish.jersey.core:jersey-client:2.25.1'
+  compile group: 'org.primefaces', name: 'primefaces', version:'6.1'
 
   compile project(':Todo-ri')
-  providedCompile group: 'javax', name: 'javaee-web-api', version:'7.0'
+
+  providedCompile 'javax:javaee-web-api:7.0',
+                  "org.glassfish.jersey.core:jersey-common:${jerseyVersion}",
+                  "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+                  "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+                  "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+                  "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${jacksonVersion}"
 }
