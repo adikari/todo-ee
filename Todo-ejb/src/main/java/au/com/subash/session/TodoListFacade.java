@@ -1,7 +1,11 @@
 package au.com.subash.session;
 
+import au.com.subash.entity.Appuser;
 import au.com.subash.entity.Todolist;
+
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,6 +22,20 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
   @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
   private EntityManager em;
+
+  @EJB
+  private UserFacadeLocal userFacade;
+
+  @Override
+  public List<Todolist> getTodoLists(int userId) {
+    Appuser user = userFacade.getUser(userId);
+
+    if (null != user) {
+      return user.getTodolistList();
+    }
+
+    return null;
+  }
 
   /**
    *

@@ -21,17 +21,6 @@ public class UserFacade implements UserFacadeLocal {
   private EntityManager em;
 
   @Override
-  public List<Todolist> getTodolists(String email) {
-    Appuser user = getUserByEmail(email);
-
-    if (null != user) {
-      return user.getTodolistList();
-    }
-
-    return null;
-  }
-
-  @Override
   public Appuser getUser(int id) {
     return em.find(Appuser.class, id);
   }

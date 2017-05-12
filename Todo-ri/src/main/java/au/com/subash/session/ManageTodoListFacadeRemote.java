@@ -22,10 +22,12 @@ public interface ManageTodoListFacadeRemote {
   AppUser getUser(int id);
 
   /**
-   * Get all lists
+   * Get all todo lists for user id
+   *
+   * @param userId User id
    * @return All found lists
    */
-  List<TodoList> getTodoLists(String email);
+  List<TodoList> getTodoLists(int userId);
 
   /**
    * Add a new list

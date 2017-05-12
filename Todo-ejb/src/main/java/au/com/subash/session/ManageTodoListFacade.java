@@ -22,20 +22,26 @@ import javax.ejb.Stateless;
 public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
 
   @EJB
-  private TodoListFacade todoListFacade;
+  private TodoListFacadeLocal todoListFacade;
 
   @EJB
-  private TodoItemFacade todoItemFacade;
+  private TodoItemFacadeLocal todoItemFacade;
 
   @EJB
-  private UserFacade userFacade;
+  private UserFacadeLocal userFacade;
 
   @Override
   // @RolesAllowed({"USER"})
-  public List<TodoList> getTodoLists(String email) {
-    return userFacade.getTodolists(email).stream()
-            .map(t -> this.todoListDAO2DTO(t))
-            .collect(Collectors.toList());
+  public List<TodoList> getTodoLists(int userId) {
+    List<Todolist> lists = todoListFacade.getTodoLists(userId);
+
+    if (null == lists) {
+      return null;
+    }
+
+    return lists.stream()
+          .map(t -> this.todoListDAO2DTO(t))
+          .collect(Collectors.toList());
   }
 
   @Override
