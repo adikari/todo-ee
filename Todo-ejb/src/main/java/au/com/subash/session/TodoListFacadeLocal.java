@@ -14,6 +14,16 @@ import javax.ejb.Local;
 public interface TodoListFacadeLocal {
 
   /**
+   * Find todo list by user id and list id
+   *
+   * @param userId User id
+   * @param listId List id
+   *
+   * @return Found Todo list
+   */
+  Todolist find(int userId, int listId);
+
+  /**
    *  Get todo lists for given user
    *
    *  @param userId User id

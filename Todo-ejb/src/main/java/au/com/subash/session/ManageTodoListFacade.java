@@ -35,13 +35,23 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   public List<TodoList> getTodoLists(int userId) {
     List<Todolist> lists = todoListFacade.getTodoLists(userId);
 
-    if (null == lists) {
-      return null;
-    }
+    if (null == lists) { return null; }
 
     return lists.stream()
           .map(t -> this.todoListDAO2DTO(t))
           .collect(Collectors.toList());
+  }
+
+  @Override
+  // @RolesAllowed({"USER"})
+  public List<TodoItem> getTodoItems(int userId, int listId) {
+    List<Todoitem> items = todoItemFacade.getTodoItems(userId, listId);
+
+    if (null == items) { return null; }
+
+    return items.stream()
+            .map(i -> this.todoItemDAO2DTO(i))
+            .collect(Collectors.toList());
   }
 
   @Override

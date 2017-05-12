@@ -30,6 +30,15 @@ public interface ManageTodoListFacadeRemote {
   List<TodoList> getTodoLists(int userId);
 
   /**
+   * Get all todo items in a list for a user id
+   *
+   * @param userId User id
+   * @param listId Todo list id
+   * @return List of todo items
+   */
+  List<TodoItem> getTodoItems(int userId, int listId);
+
+  /**
    * Add a new list
    *
    * @param list List to add

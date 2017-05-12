@@ -48,6 +48,24 @@ public class TodoListFacade implements TodoListFacadeLocal {
   }
 
   @Override
+  public Todolist find(int userId, int listId) {
+    Appuser user = userFacade.getUser(userId);
+
+    if (null == user) { return null; }
+
+    TypedQuery<Todolist> query = em.createNamedQuery(
+      "Todolist.findByIdAndUserId", Todolist.class
+    );
+
+    query.setParameter("listId", listId);
+    query.setParameter("userId", userId);
+
+    List<Todolist> results = query.getResultList();
+
+    return results.isEmpty() ? null : results.get(0);
+  }
+
+  @Override
   public List<Todolist> getAll() {
     TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
 

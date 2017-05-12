@@ -30,7 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Todolist.findAll", query = "SELECT t FROM Todolist t")
     , @NamedQuery(name = "Todolist.findById", query = "SELECT t FROM Todolist t WHERE t.id = :id")
-    , @NamedQuery(name = "Todolist.findByTitle", query = "SELECT t FROM Todolist t WHERE t.title = :title")})
+    , @NamedQuery(name = "Todolist.findByTitle", query = "SELECT t FROM Todolist t WHERE t.title = :title")
+    , @NamedQuery(name = "Todolist.findByIdAndUserId", query = "SELECT t FROM Todolist t WHERE t.id = :listId AND t.appuser.id = :userId")
+})
 public class Todolist implements Serializable {
 
     private static final long serialVersionUID = 1L;

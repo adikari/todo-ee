@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import au.com.subash.entity.AppUser;
+import au.com.subash.entity.TodoItem;
 import au.com.subash.entity.TodoList;
 import au.com.subash.session.ManageTodoListFacadeRemote;
 
@@ -28,9 +29,9 @@ public class UserService {
    * @param User id
    * @return Response
    */
-  @GET @Path("/{id}")
-  public Response getUser(@PathParam("id") int id) {
-    AppUser user = facade.getUser(id);
+  @GET @Path("/{userId}")
+  public Response getUser(@PathParam("userId") int userId) {
+    AppUser user = facade.getUser(userId);
 
     ResponseBuilder response = null != user ? Response.ok() : Response.noContent();
 
@@ -43,12 +44,24 @@ public class UserService {
    * @param id User id
    * @return Response
    */
-  @GET @Path("/{id}/lists")
-  public Response getLists(@PathParam("id") int id) {
-    List<TodoList> todoLists = facade.getTodoLists(id);
+  @GET @Path("/{userId}/lists")
+  public Response getLists(@PathParam("userId") int userId) {
+    List<TodoList> todoLists = facade.getTodoLists(userId);
 
     ResponseBuilder response = null != todoLists ? Response.ok() : Response.noContent();
 
     return response.entity(todoLists).build();
+  }
+
+  @GET @Path("/{userId}/lists/{listId}/items")
+  public Response getTodoList(
+    @PathParam("userId") int userId,
+    @PathParam("listId") int listId
+  ) {
+    List<TodoItem> items = facade.getTodoItems(userId, listId);
+
+    ResponseBuilder response = null != items ? Response.ok() : Response.noContent();
+
+    return response.entity(items).build();
   }
 }

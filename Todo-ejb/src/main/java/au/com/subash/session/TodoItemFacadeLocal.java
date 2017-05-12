@@ -1,6 +1,9 @@
 package au.com.subash.session;
 
 import au.com.subash.entity.Todoitem;
+
+import java.util.List;
+
 import javax.ejb.Local;
 
 /**
@@ -12,7 +15,7 @@ public interface TodoItemFacadeLocal {
 
     /**
      * Update item
-     * 
+     *
      * @param item Item to update
      * @return boolean
      */
@@ -25,4 +28,14 @@ public interface TodoItemFacadeLocal {
      * @return Found item
      */
     Todoitem find(int id);
+
+
+    /**
+     * Get todo items in a list for a user
+     *
+     * @param userId User id
+     * @param listId Todo list id
+     * @return List of todo items
+     */
+    List<Todoitem> getTodoItems(int userId, int listId);
 }

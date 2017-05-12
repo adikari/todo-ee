@@ -1,25 +1,29 @@
 package au.com.subash.rest;
 
-import javax.ws.rs.GET;
+import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import au.com.subash.entity.TodoList;
+import au.com.subash.session.ManageTodoListFacadeRemote;
+
+@Produces(MediaType.APPLICATION_JSON)
 public class TodoListService {
 
-  private int userId;
+  @EJB
+  private ManageTodoListFacadeRemote facade;
 
   /**
-   * Default constructor
-   */
-  public TodoListService(int userId) {
-    this.userId = userId;
-  }
-
-  /**
-   * Get all todo lists for user
+   * Get todo lists for user
    *
-   * @return List of todo lists
+   * @param id User id
+   * @return Response
    */
   @GET
-  public int getTodoLists() {
-    return userId;
+  public List<TodoList> getTodoLists() {
+    return facade.getTodoLists(1);
   }
 }
