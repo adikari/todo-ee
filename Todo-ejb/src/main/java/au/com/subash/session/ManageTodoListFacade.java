@@ -124,16 +124,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
       return null;
     }
 
-    Todolist dao = new Todolist(list.getId(), list.getTitle());
-
-    List<Todoitem> items = list.getTodoitemCollection().stream()
-            .map(item -> todoItemDTO2DAO(item, dao))
-            .collect(Collectors.toList());
-
-    dao.setTodoitemList(items);
-    dao.setAppuser(userFacade.getUser(1));
-
-    return dao;
+    return new Todolist(list.getId(), list.getTitle());
   }
 
   /**
@@ -147,11 +138,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
       return null;
     }
 
-    List<TodoItem> todoitemCollection = list.getTodoitemList().stream()
-            .map(t -> todoItemDAO2DTO(t))
-            .collect(Collectors.toList());
-
-    return new TodoList(list.getId(), list.getTitle(), todoitemCollection);
+    return new TodoList(list.getId(), list.getTitle());
   }
 
   /**
