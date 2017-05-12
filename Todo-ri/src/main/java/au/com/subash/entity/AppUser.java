@@ -1,8 +1,5 @@
 package au.com.subash.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author subash
@@ -13,16 +10,6 @@ public class AppUser {
   private String firstname;
   private String lastname;
   private String category;
-  private List<TodoList> todolists;
-
-  public AppUser(int id, String email, String firstname, String lastname, String category, List<TodoList> todolist) {
-    this.id = id;
-    this.email = email;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.category = category;
-    this.todolists = todolist;
-  }
 
   public AppUser(int id, String email, String firstname, String lastname, String category) {
     this.id = id;
@@ -30,7 +17,6 @@ public class AppUser {
     this.firstname = firstname;
     this.lastname = lastname;
     this.category = category;
-    this.todolists = new ArrayList<TodoList>();
   }
 
   public int getId() {
@@ -67,20 +53,6 @@ public class AppUser {
 
   public void setCategory(String category) {
     this.category = category;
-  }
-
-  /**
-   * @return the todolist
-   */
-  public List<TodoList> getTodolists() {
-    return todolists;
-  }
-
-  /**
-   * @param todolist the todolist to set
-   */
-  public void setTodolists(List<TodoList> todolist) {
-    this.todolists = todolist;
   }
 
   public String getFullname() {
