@@ -73,8 +73,8 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  public AppUser getUser(String email) {
-    return userDAO2DTO(userFacade.getUser(email));
+  public AppUser getUser(int id) {
+    return userDAO2DTO(userFacade.getUser(id));
   }
 
   /**
@@ -115,7 +115,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
             .collect(Collectors.toList());
 
     dao.setTodoitemList(items);
-    dao.setAppuser(userFacade.getUser(""));
+    dao.setAppuser(userFacade.getUser(1));
 
     return dao;
   }

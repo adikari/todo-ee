@@ -19,9 +19,18 @@ public interface UserFacadeLocal {
   List<Todolist> getTodolists(String user);
 
   /**
-   * Get currently logged in user
+   * Get user by id
    *
+   * @param id User id
    * @return Logged in user
    */
-  Appuser getUser(String email);
+  Appuser getUser(int id);
+
+  /**
+   * Get user by email
+   *
+   * @param email User email
+   * @return Logged in user
+   */
+  Appuser getUserByEmail(String email);
 }

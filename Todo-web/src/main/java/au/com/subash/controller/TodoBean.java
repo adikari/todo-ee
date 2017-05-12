@@ -31,7 +31,7 @@ public class TodoBean implements Serializable {
 
   @PostConstruct
   public void init() {
-    user = facade.getUser("todo");
+    user = facade.getUser(1);
     todoLists = user.getTodolists();
 
     if (todoLists.size() > 0) {
