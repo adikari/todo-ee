@@ -16,55 +16,55 @@ import javax.persistence.TypedQuery;
 @LocalBean
 public class TodoListFacade implements TodoListFacadeLocal {
 
-    @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
-    
-    /**
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Todolist find(int id) {
-        return em.find(Todolist.class, id);
+  @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
+  private EntityManager em;
+
+  /**
+   *
+   * @param id
+   * @return
+   */
+  @Override
+  public Todolist find(int id) {
+    return em.find(Todolist.class, id);
+  }
+
+  @Override
+  public List<Todolist> getAll() {
+    TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
+
+    return query.getResultList();
+  }
+
+  @Override
+  public boolean remove(int id) {
+    Todolist found = find(id);
+
+    if (null != found) {
+      em.remove(found);
+      return true;
     }
 
-    @Override
-    public List<Todolist> getAll() {
-        TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
-        
-        return query.getResultList();
+    return false;
+  }
+
+  @Override
+  public Todolist create(Todolist list) {
+    em.persist(list);
+    em.flush();
+    return list;
+  }
+
+  @Override
+  public Todolist update(Todolist list) {
+    Todolist found = find(list.getId());
+
+    if (null != found) {
+      em.merge(list);
+      em.flush();
+      return found;
     }
 
-    @Override
-    public boolean remove(int id) {
-        Todolist found = find(id);
-        
-        if (null != found) {
-            em.remove(found);
-            return true;
-        }
-               
-        return false;
-    }
-
-    @Override
-    public Todolist create(Todolist list) {
-        em.persist(list);
-        em.flush();
-        return list;
-    }
-
-    @Override
-    public Todolist update(Todolist list) {
-        Todolist found = find(list.getId());
-        
-        if (null != found) {
-            em.merge(list);
-            em.flush();
-            return found;
-        }
-
-        return null;
-    }
+    return null;
+  }
 }

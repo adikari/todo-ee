@@ -15,6 +15,7 @@ public class RestApplication extends Application {
     Set<Class<?>> resources = new java.util.HashSet<>();
 
     resources.add(TodoListService.class);
+    resources.add(UserService.class);
 
     resources.add(ObjectMapperProvider.class);
     resources.add(JacksonFeature.class);

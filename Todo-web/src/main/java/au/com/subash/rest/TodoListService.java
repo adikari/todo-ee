@@ -24,7 +24,7 @@ public class TodoListService {
    */
   @GET @Produces(MediaType.APPLICATION_JSON)
   public Response getTodoLists() {
-    List<TodoList> todoLists = facade.getTodoLists();
+    List<TodoList> todoLists = facade.getTodoLists("");
     return Response.status(200).entity(todoLists).build();
   }
 }

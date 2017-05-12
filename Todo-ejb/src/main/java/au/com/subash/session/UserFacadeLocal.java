@@ -11,17 +11,17 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserFacadeLocal {
-    
-    /**
-     * Get lists for a user
-     * @return 
-     */
-    List<Todolist> getTodolists();
-    
-    /**
-     * Get currently logged in user
-     * 
-     * @return Logged in user
-     */
-    Appuser getUser();
+
+  /**
+   * Get lists for a user
+   * @return
+   */
+  List<Todolist> getTodolists(String user);
+
+  /**
+   * Get currently logged in user
+   *
+   * @return Logged in user
+   */
+  Appuser getUser(String email);
 }
