@@ -127,9 +127,10 @@ public class TodoBean implements Serializable {
         return;
     }
 
-    TodoItem item = new TodoItem(newTodoItem, selectedList.getId());
+    // TodoItem item = new TodoItem(newTodoItem, selectedList.getId());
 
-    selectedList.getTodoitemCollection().add(item);
+    // TODO: use different api
+    // selectedList.getTodoitemCollection().add(item);
 
     TodoList updateList = updateSelectedList();
 
@@ -173,13 +174,13 @@ public class TodoBean implements Serializable {
    * @param todoItem TodoItem
    */
   public void toogleTodoItem(TodoItem todoItem) {
-    TodoItem item = selectedList.getTodoitemCollection().stream()
-            .filter(t -> t.getTitle().equals(todoItem.getTitle()))
-            .findFirst().get();
+    // TodoItem item = selectedList.getTodoitemCollection().stream()
+    //         .filter(t -> t.getTitle().equals(todoItem.getTitle()))
+    //         .findFirst().get();
 
-    if (!facade.updateTodoItem(item)) {
-        item.setIscomplete(!item.getIscomplete());
-    }
+    // if (!facade.updateTodoItem(item)) {
+    //     item.setIscomplete(!item.getIscomplete());
+    // }
   }
 
   /**
