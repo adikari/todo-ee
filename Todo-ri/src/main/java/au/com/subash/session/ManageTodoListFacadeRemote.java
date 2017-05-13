@@ -40,6 +40,16 @@ public interface ManageTodoListFacadeRemote {
   boolean deleteTodoList(int userId, int listId);
 
   /**
+   *  Update a todo list
+   *
+   * @param userId User id
+   * @param list TodoList to update
+   *
+   * @return Success or failure
+   */
+  boolean updateTodoList(int userId, TodoList list);
+
+  /**
    * Get all todo items in a list for a user id
    *
    * @param userId User id

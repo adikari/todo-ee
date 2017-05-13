@@ -87,4 +87,15 @@ public class TodoListFacade implements TodoListFacadeLocal {
     em.remove(list);
     return true;
   }
+
+  @Override
+  public boolean update(int userId, Todolist list) {
+    Todolist foundList = find(userId, list.getId());
+
+    if (null == foundList) { return false; }
+
+    list.setAppuser(foundList.getAppuser());
+    em.merge(list);
+    return true;
+  }
 }

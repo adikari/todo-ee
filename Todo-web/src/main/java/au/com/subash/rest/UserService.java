@@ -113,6 +113,24 @@ public class UserService {
   }
 
   /**
+   * Update todo list
+   *
+   * @param userId User id
+   * @param list Todo list with updated values
+   */
+  @PUT @Path("/lists/{listId}")
+  public Response updateTodoList(
+    @PathParam("userId") int userId,
+    TodoList list
+  ) {
+    boolean isUpdated = facade.updateTodoList(userId, list);
+
+    ResponseBuilder response = isUpdated ? Response.ok() : Response.noContent();
+
+    return response.build();
+  }
+
+  /**
    * Get todo items in a todo list
    * @param userId User id
    * @param listId Todo list id

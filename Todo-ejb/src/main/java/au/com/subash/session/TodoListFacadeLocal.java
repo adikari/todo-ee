@@ -58,4 +58,15 @@ public interface TodoListFacadeLocal {
    * @return Created list
    */
   boolean remove(int userId, int listId);
+
+
+  /**
+   * Update todo list
+   *
+   * @param userId User id
+   * @param list Todolist to update
+   *
+   * @return Success or failure
+   */
+  boolean update(int userId, Todolist list);
 }
