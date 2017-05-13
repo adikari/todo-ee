@@ -66,4 +66,17 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
 
     return results.isEmpty() ? null : results.get(0);
   }
+
+  @Override
+  public Todoitem addTodoItem(int listId, Todoitem item) {
+    Todolist list = todoListFacade.find(listId);
+
+    if (null == list) { return null; }
+
+    item.setTodolistid(list);
+    em.persist(item);
+    em.flush();
+
+    return item;
+  }
 }

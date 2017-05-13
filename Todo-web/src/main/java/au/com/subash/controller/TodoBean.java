@@ -111,12 +111,12 @@ public class TodoBean implements Serializable {
    * Add new list
    */
   public void addTodoList() {
-    TodoList list = facade.addTodoList(new TodoList("Untitled"));
+    // TodoList list = facade.addTodoList(new TodoList("Untitled"));
 
-    if (null != list) {
-        selectedList = list;
-        todoLists.add(selectedList);
-    }
+    // if (null != list) {
+    //     selectedList = list;
+    //     todoLists.add(selectedList);
+    // }
   }
 
   /**
@@ -146,7 +146,8 @@ public class TodoBean implements Serializable {
    * @return boolean
    */
   public TodoList updateSelectedList() {
-    return facade.updateTodoList(selectedList);
+    return null;
+    // return facade.updateTodoList(selectedList);
   }
 
   /**
@@ -155,17 +156,17 @@ public class TodoBean implements Serializable {
    */
   public void removeTodoList() {
 
-    if (!facade.removeTodoList(selectedList.getId())) {
-        return;
-    }
+//     if (!facade.removeTodoList(selectedList.getId())) {
+//         return;
+//     }
 
-    todoLists.remove(selectedList);
+//     todoLists.remove(selectedList);
 
-    if (todoLists.size() > 0) {
-        selectedList = todoLists.get(0);
-    } else {
-        selectedList = null;
-    }
+//     if (todoLists.size() > 0) {
+//         selectedList = todoLists.get(0);
+//     } else {
+//         selectedList = null;
+//     }
   }
 
   /**

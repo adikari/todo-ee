@@ -51,34 +51,12 @@ public interface ManageTodoListFacadeRemote {
   TodoItem getTodoItem(int userId, int listId, int todoId);
 
   /**
-   * Add a new list
+   * Add a todo item in a list for a user id
    *
-   * @param list List to add
-   * @return Added list
-   */
-  TodoList addTodoList(TodoList list);
-
-  /**
-   * Remove list
+   * @param listId Todo list id
+   * @param item TodoItem to add
    *
-   * @param id Id of list to remove
-   * @return Success and failure
+   * @return Added todo item
    */
-  boolean removeTodoList(int id);
-
-  /**
-   * Update list
-   *
-   * @param list List to update
-   * @return Success or failure
-   */
-  TodoList updateTodoList(TodoList list);
-
-  /**
-   * Update Item
-   *
-   * @param item Item to update
-   * @return Success or failure
-   */
-  boolean updateTodoItem(TodoItem item);
+  TodoItem addTodoItem(int listId, TodoItem item);
 }

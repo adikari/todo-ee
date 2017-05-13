@@ -8,6 +8,8 @@ public class TodoList {
   private int id;
   private String title;
 
+  public TodoList() { }
+
   public TodoList(String title) {
     this.title = title;
   }

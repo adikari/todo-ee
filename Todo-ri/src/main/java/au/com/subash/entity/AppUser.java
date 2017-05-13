@@ -11,6 +11,8 @@ public class AppUser {
   private String lastname;
   private String category;
 
+  public AppUser() { }
+
   public AppUser(int id, String email, String firstname, String lastname, String category) {
     this.id = id;
     this.email = email;

@@ -49,4 +49,14 @@ public interface TodoItemFacadeLocal {
    * @return Single todo item
    */
   Todoitem getTodoItem(int userId, int listId, int todoId);
+
+  /**
+   * Add a new todo item to a list
+   *
+   * @param listId Todolist id
+   * @param item TodoItem to add
+   *
+   * @return Added todo item
+   */
+  Todoitem addTodoItem(int listId, Todoitem item);
 }
