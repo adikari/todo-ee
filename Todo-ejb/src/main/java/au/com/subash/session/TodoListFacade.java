@@ -27,7 +27,7 @@ public class TodoListFacade implements TodoListFacadeLocal {
   private UserFacadeLocal userFacade;
 
   @Override
-  public List<Todolist> getTodoLists(int userId) {
+  public List<Todolist> getAll(int userId) {
     Appuser user = userFacade.getUser(userId);
 
     if (null != user) {
@@ -66,41 +66,15 @@ public class TodoListFacade implements TodoListFacadeLocal {
   }
 
   @Override
-  public List<Todolist> getAll() {
-    TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
+  public Todolist create(int userId, Todolist list) {
+    Appuser user = userFacade.getUser(userId);
 
-    return query.getResultList();
-  }
+    if (null == user) { return null; }
 
-  @Override
-  public boolean remove(int id) {
-    Todolist found = find(id);
-
-    if (null != found) {
-      em.remove(found);
-      return true;
-    }
-
-    return false;
-  }
-
-  @Override
-  public Todolist create(Todolist list) {
+    list.setAppuser(user);
     em.persist(list);
     em.flush();
+
     return list;
-  }
-
-  @Override
-  public Todolist update(Todolist list) {
-    Todolist found = find(list.getId());
-
-    if (null != found) {
-      em.merge(list);
-      em.flush();
-      return found;
-    }
-
-    return null;
   }
 }

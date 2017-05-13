@@ -14,6 +14,14 @@ import javax.ejb.Local;
 public interface TodoListFacadeLocal {
 
   /**
+   * Find list
+   *
+   * @param id Id of list to find
+   * @return Found list
+   */
+  Todolist find(int id);
+
+  /**
    * Find todo list by user id and list id
    *
    * @param userId User id
@@ -29,44 +37,15 @@ public interface TodoListFacadeLocal {
    *  @param userId User id
    *  @return List of todo lists
    */
-  List<Todolist> getTodoLists(int userId);
-
-  /**
-   * Find list
-   *
-   * @param id Id of list to find
-   * @return Found list
-   */
-  Todolist find(int id);
-
-  /**
-   * Get all lists
-   *
-   * @return All lists
-   */
-  List<Todolist> getAll();
-
-  /**
-   * Remove a list
-   *
-   * @param id Id of list to remove
-   * @return Success or failure
-   */
-  boolean remove(int id);
+  List<Todolist> getAll(int userId);
 
   /**
    * Create new list
    *
+   * @param userId User id
    * @param list New list to create
+   *
    * @return Created list
    */
-  Todolist create(Todolist list);
-
-  /**
-   * Update list
-   *
-   * @param list List to update
-   * @return Success or failure
-   */
-  Todolist update(Todolist list);
+  Todolist create(int userId, Todolist list);
 }

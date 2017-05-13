@@ -37,7 +37,7 @@ public interface TodoItemFacadeLocal {
      * @param listId Todo list id
      * @return List of todo items
      */
-    List<Todoitem> getTodoItems(int userId, int listId);
+    List<Todoitem> getAll(int userId, int listId);
 
   /**
    * Get a todo item in a list for a user id
@@ -48,15 +48,16 @@ public interface TodoItemFacadeLocal {
    *
    * @return Single todo item
    */
-  Todoitem getTodoItem(int userId, int listId, int todoId);
+  Todoitem find(int userId, int listId, int todoId);
 
   /**
    * Add a new todo item to a list
    *
+   * @param userId User id
    * @param listId Todolist id
    * @param item TodoItem to add
    *
    * @return Added todo item
    */
-  Todoitem addTodoItem(int listId, Todoitem item);
+  Todoitem create(int userId, int listId, Todoitem item);
 }

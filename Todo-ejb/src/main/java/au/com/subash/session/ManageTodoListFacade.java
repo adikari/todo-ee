@@ -38,7 +38,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   @Override
   // @RolesAllowed({"USER"})
   public List<TodoList> getTodoLists(int userId) {
-    List<Todolist> lists = todoListFacade.getTodoLists(userId);
+    List<Todolist> lists = todoListFacade.getAll(userId);
 
     if (null == lists) { return null; }
 
@@ -50,7 +50,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   @Override
   // @RolesAllowed({"USER"})
   public List<TodoItem> getTodoItems(int userId, int listId) {
-    List<Todoitem> items = todoItemFacade.getTodoItems(userId, listId);
+    List<Todoitem> items = todoItemFacade.getAll(userId, listId);
 
     if (null == items) { return null; }
 
@@ -62,19 +62,29 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   @Override
   // @RolesAllowed({"USER"})
   public TodoItem getTodoItem(int userId, int listId, int todoId) {
-    Todoitem item = todoItemFacade.getTodoItem(userId, listId, todoId);
+    Todoitem item = todoItemFacade.find(userId, listId, todoId);
 
     return todoItemDAO2DTO(item);
   }
 
   @Override
   // @RolesAllowed({"USER"})
-  public TodoItem addTodoItem(int listId, TodoItem item) {
+  public TodoItem addTodoItem(int userId, int listId, TodoItem item) {
     Todoitem dao = todoItemDTO2DAO(item);
 
-    Todoitem addedItem = todoItemFacade.addTodoItem(listId, dao);
+    Todoitem addedItem = todoItemFacade.create(userId, listId, dao);
 
     return todoItemDAO2DTO(addedItem);
+  }
+
+  @Override
+  // @RolesAllowed({"USER"})
+  public TodoList addTodoList(int userId, TodoList list) {
+    Todolist dao = todoListDTO2DAO(list);
+
+    Todolist addedList = todoListFacade.create(userId, dao);
+
+    return todoListDAO2DTO(addedList);
   }
 
   /**
@@ -103,13 +113,13 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
    * @param list List DTO
    * @return List DAO
    */
-  // private Todolist todoListDTO2DAO(TodoList list) {
-  //   if (null == list) {
-  //     return null;
-  //   }
+  private Todolist todoListDTO2DAO(TodoList list) {
+    if (null == list) {
+      return null;
+    }
 
-  //   return new Todolist(list.getId(), list.getTitle());
-  // }
+    return new Todolist(list.getId(), list.getTitle());
+  }
 
   /**
    * Convert List DAO to DTO

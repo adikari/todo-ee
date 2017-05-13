@@ -51,12 +51,23 @@ public interface ManageTodoListFacadeRemote {
   TodoItem getTodoItem(int userId, int listId, int todoId);
 
   /**
-   * Add a todo item in a list for a user id
+   * Add a todo item in a list
    *
+   * @param userId User id
    * @param listId Todo list id
    * @param item TodoItem to add
    *
    * @return Added todo item
    */
-  TodoItem addTodoItem(int listId, TodoItem item);
+  TodoItem addTodoItem(int userId, int listId, TodoItem item);
+
+  /**
+   * Add todo list for a user
+   *
+   * @param userId User id
+   * @param list Todo list to add
+   *
+   * @return Added todo list
+  */
+  TodoList addTodoList(int userId, TodoList list);
 }

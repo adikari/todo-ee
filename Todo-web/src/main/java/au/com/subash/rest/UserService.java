@@ -62,6 +62,35 @@ public class UserService {
   }
 
   /**
+   * Add single todo item in a list
+   *
+   * @param listId Todo list id
+   *
+   * @return Response with found todo item
+   */
+  @POST @Path("/lists")
+  public Response addTodoList(
+    @PathParam("userId") int userId,
+    TodoList list,
+    @Context UriInfo uriInfo
+  ) {
+    TodoList addedList = facade.addTodoList(userId, list);
+
+    ResponseBuilder response;
+
+    if (null == addedList) {
+      response = Response.noContent();
+    } else {
+      UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+      builder.path(Integer.toString(addedList.getId()));
+
+      response = Response.created(builder.build());
+    }
+
+    return response.entity(addedList).build();
+  }
+
+  /**
    * Get todo items in a todo list
    * @param userId User id
    * @param listId Todo list id
@@ -89,11 +118,12 @@ public class UserService {
    */
   @POST @Path("/lists/{listId}/items")
   public Response addTodoItem(
+    @PathParam("userId") int userId,
     @PathParam("listId") int listId,
     TodoItem item,
     @Context UriInfo uriInfo
   ) {
-    TodoItem addedItem = facade.addTodoItem(listId, item);
+    TodoItem addedItem = facade.addTodoItem(userId, listId, item);
 
     ResponseBuilder response;
 
@@ -130,35 +160,4 @@ public class UserService {
 
     return response.entity(item).build();
   }
-
-  /**
-   * Add single todo item in a list
-   *
-   * @param listId Todo list id
-   *
-   * @return Response with found todo item
-   */
-  // @POST @Path("/lists/{listId}/items")
-  // public Response addTodoList(
-  //   @PathParam("userId") int userId,
-  //   TodoList list,
-  //   @Context UriInfo uriInfo
-  // ) {
-  //   TodoItem addedList = facade.addTodoItem(listId, item);
-
-  //   ResponseBuilder response;
-
-  //   if (null == addedList) {
-  //     response = Response.noContent();
-  //   } else {
-  //     UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-  //     builder.path(Integer.toString(addedList.getId()));
-
-  //     Response.created(builder.build());
-  //   }
-
-  //   return response.entity(addedList).build();
-  // }
-
-
 }

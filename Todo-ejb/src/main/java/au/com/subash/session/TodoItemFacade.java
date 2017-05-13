@@ -44,7 +44,7 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
   }
 
   @Override
-  public List<Todoitem> getTodoItems(int userId, int listId) {
+  public List<Todoitem> getAll(int userId, int listId) {
     Todolist list = todoListFacade.find(userId, listId);
 
     if (null == list) { return null; }
@@ -53,7 +53,7 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
   }
 
   @Override
-  public Todoitem getTodoItem(int userId, int listId, int todoId) {
+  public Todoitem find(int userId, int listId, int todoId) {
     TypedQuery<Todoitem> query = em.createNamedQuery(
       "Todoitem.findByListIdAndTodoId", Todoitem.class
     );
@@ -68,8 +68,8 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
   }
 
   @Override
-  public Todoitem addTodoItem(int listId, Todoitem item) {
-    Todolist list = todoListFacade.find(listId);
+  public Todoitem create(int userId, int listId, Todoitem item) {
+    Todolist list = todoListFacade.find(userId, listId);
 
     if (null == list) { return null; }
 
