@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -171,6 +172,19 @@ public class UserService {
     boolean isDeleted = facade.deleteTodoItem(userId, listId, itemId);
 
     ResponseBuilder response = isDeleted ? Response.ok() : Response.noContent();
+
+    return response.build();
+  }
+
+  @PUT @Path("/lists/{listId}/items/{itemId}")
+  public Response updateTodoItem(
+    @PathParam("userId") int userId,
+    @PathParam("listId") int listId,
+    TodoItem item
+  ) {
+    boolean isUpdated = facade.updateTodoItem(userId, listId, item);
+
+    ResponseBuilder response = isUpdated ? Response.ok() : Response.noContent();
 
     return response.build();
   }

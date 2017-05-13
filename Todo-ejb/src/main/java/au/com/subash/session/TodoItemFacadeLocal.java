@@ -71,4 +71,15 @@ public interface TodoItemFacadeLocal {
    * @return Success or failure
    */
   boolean remove(int userId, int listId, int itemId);
+
+  /**
+   *  Update a todo item
+   *
+   * @param userId User id
+   * @param listId List id
+   * @param item Todo item
+   *
+   * @return Success or failure
+   */
+  boolean update(int userId, int listId, Todoitem item);
 }

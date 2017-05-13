@@ -87,6 +87,19 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
     if (null == item) { return false; }
 
     em.remove(item);
+
+    return true;
+  }
+
+  @Override
+  public boolean update(int userId, int listId, Todoitem item) {
+    Todoitem foundItem = find(userId, listId, item.getId());
+
+    if (null == foundItem) { return false; }
+
+    item.setTodolistid(foundItem.getTodolistid());
+    em.merge(item);
+
     return true;
   }
 }

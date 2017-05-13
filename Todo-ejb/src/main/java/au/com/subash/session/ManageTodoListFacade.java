@@ -88,9 +88,18 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     return todoListDAO2DTO(addedList);
   }
 
+  @Override
   // @RolesAllowed({"USER"})
   public boolean deleteTodoItem(int userId, int listId, int itemId) {
     return todoItemFacade.remove(userId, listId, itemId);
+  }
+
+  @Override
+  // @RolesAllowed({"USER"})
+  public boolean updateTodoItem(int userId, int listId, TodoItem item) {
+    Todoitem dao = todoItemDTO2DAO(item);
+
+    return todoItemFacade.update(userId, listId, dao);
   }
 
   /**
