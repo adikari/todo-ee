@@ -93,6 +93,26 @@ public class UserService {
   }
 
   /**
+   * Delete todo list for a user
+   *
+   * @param userId User id
+   * @param listId Todo list id
+   *
+   * @return Response with success or failure
+   */
+  @DELETE @Path("/lists/{listId}")
+  public Response deleteTodoList(
+    @PathParam("userId") int userId,
+    @PathParam("listId") int listId
+  ) {
+    boolean isDeleted = facade.deleteTodoList(userId, listId);
+
+    ResponseBuilder response = isDeleted ? Response.ok() : Response.noContent();
+
+    return response.build();
+  }
+
+  /**
    * Get todo items in a todo list
    * @param userId User id
    * @param listId Todo list id

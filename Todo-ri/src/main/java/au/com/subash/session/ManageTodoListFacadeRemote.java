@@ -30,6 +30,16 @@ public interface ManageTodoListFacadeRemote {
   List<TodoList> getTodoLists(int userId);
 
   /**
+   *  Delete a todo list
+   *
+   * @param userId User id
+   * @param listId List id
+   *
+   * @return Success or failure
+   */
+  boolean deleteTodoList(int userId, int listId);
+
+  /**
    * Get all todo items in a list for a user id
    *
    * @param userId User id

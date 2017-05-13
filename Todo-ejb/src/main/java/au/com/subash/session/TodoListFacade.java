@@ -77,4 +77,14 @@ public class TodoListFacade implements TodoListFacadeLocal {
 
     return list;
   }
+
+  @Override
+  public boolean remove(int userId, int listId) {
+    Todolist list = find(userId, listId);
+
+    if (null == list) { return false; }
+
+    em.remove(list);
+    return true;
+  }
 }

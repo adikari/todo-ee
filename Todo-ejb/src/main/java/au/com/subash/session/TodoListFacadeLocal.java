@@ -48,4 +48,14 @@ public interface TodoListFacadeLocal {
    * @return Created list
    */
   Todolist create(int userId, Todolist list);
+
+  /**
+   * Create new list
+   *
+   * @param userId User id
+   * @param list New list to create
+   *
+   * @return Created list
+   */
+  boolean remove(int userId, int listId);
 }
