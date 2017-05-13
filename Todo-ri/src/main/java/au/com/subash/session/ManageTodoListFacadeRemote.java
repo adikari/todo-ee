@@ -62,6 +62,17 @@ public interface ManageTodoListFacadeRemote {
   TodoItem addTodoItem(int userId, int listId, TodoItem item);
 
   /**
+   *  Delete a todo item
+   *
+   * @param userId User id
+   * @param listId List id
+   * @param itemId Item id
+   *
+   * @return Success or failure
+   */
+  boolean deleteTodoItem(int userId, int listId, int itemId);
+
+  /**
    * Add todo list for a user
    *
    * @param userId User id

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -159,5 +160,18 @@ public class UserService {
     ResponseBuilder response = null != item ? Response.ok() : Response.noContent();
 
     return response.entity(item).build();
+  }
+
+  @DELETE @Path("/lists/{listId}/items/{itemId}")
+  public Response deleteTodoItem(
+    @PathParam("userId") int userId,
+    @PathParam("listId") int listId,
+    @PathParam("itemId") int itemId
+  ) {
+    boolean isDeleted = facade.deleteTodoItem(userId, listId, itemId);
+
+    ResponseBuilder response = isDeleted ? Response.ok() : Response.noContent();
+
+    return response.build();
   }
 }

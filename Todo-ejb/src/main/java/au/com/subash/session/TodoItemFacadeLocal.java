@@ -60,4 +60,15 @@ public interface TodoItemFacadeLocal {
    * @return Added todo item
    */
   Todoitem create(int userId, int listId, Todoitem item);
+
+  /**
+   * Delete todo item
+   *
+   * @param userId User id
+   * @param listId Todolist id
+   * @param item TodoItem to add
+   *
+   * @return Success or failure
+   */
+  boolean remove(int userId, int listId, int itemId);
 }

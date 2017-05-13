@@ -19,6 +19,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 // @DeclareRoles({"USER"})
+// TODO: Need to verify authority of user. compare user id
 public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
 
   @EJB
@@ -85,6 +86,11 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
     Todolist addedList = todoListFacade.create(userId, dao);
 
     return todoListDAO2DTO(addedList);
+  }
+
+  // @RolesAllowed({"USER"})
+  public boolean deleteTodoItem(int userId, int listId, int itemId) {
+    return todoItemFacade.remove(userId, listId, itemId);
   }
 
   /**

@@ -79,4 +79,14 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
 
     return item;
   }
+
+  @Override
+  public boolean remove(int userId, int listId, int todoId) {
+    Todoitem item = find(userId, listId, todoId);
+
+    if (null == item) { return false; }
+
+    em.remove(item);
+    return true;
+  }
 }
