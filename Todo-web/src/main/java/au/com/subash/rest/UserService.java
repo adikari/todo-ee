@@ -9,9 +9,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 import au.com.subash.entity.AppUser;
 import au.com.subash.entity.TodoItem;
@@ -86,14 +89,22 @@ public class UserService {
    */
   @POST @Path("/lists/{listId}/items")
   public Response addTodoItem(
-    @PathParam("userId") int userId,
     @PathParam("listId") int listId,
-    TodoItem item
+    TodoItem item,
+    @Context UriInfo uriInfo
   ) {
     TodoItem addedItem = facade.addTodoItem(listId, item);
 
-    //TODO: if successful, send created response.
-    ResponseBuilder response = null != addedItem ? Response.ok() : Response.noContent();
+    ResponseBuilder response;
+
+    if (null == addedItem) {
+      response = Response.noContent();
+    } else {
+      UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+      builder.path(Integer.toString(addedItem.getId()));
+
+      response = Response.created(builder.build());
+    }
 
     return response.entity(addedItem).build();
   }
@@ -119,4 +130,35 @@ public class UserService {
 
     return response.entity(item).build();
   }
+
+  /**
+   * Add single todo item in a list
+   *
+   * @param listId Todo list id
+   *
+   * @return Response with found todo item
+   */
+  // @POST @Path("/lists/{listId}/items")
+  // public Response addTodoList(
+  //   @PathParam("userId") int userId,
+  //   TodoList list,
+  //   @Context UriInfo uriInfo
+  // ) {
+  //   TodoItem addedList = facade.addTodoItem(listId, item);
+
+  //   ResponseBuilder response;
+
+  //   if (null == addedList) {
+  //     response = Response.noContent();
+  //   } else {
+  //     UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+  //     builder.path(Integer.toString(addedList.getId()));
+
+  //     Response.created(builder.build());
+  //   }
+
+  //   return response.entity(addedList).build();
+  // }
+
+
 }
