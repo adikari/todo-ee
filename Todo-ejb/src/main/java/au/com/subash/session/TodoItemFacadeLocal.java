@@ -38,4 +38,15 @@ public interface TodoItemFacadeLocal {
      * @return List of todo items
      */
     List<Todoitem> getTodoItems(int userId, int listId);
+
+  /**
+   * Get a todo item in a list for a user id
+   *
+   * @param userId User id
+   * @param listId Todo list id
+   * @param itemId Todo item id
+   *
+   * @return Single todo item
+   */
+  Todoitem getTodoItem(int userId, int listId, int todoId);
 }

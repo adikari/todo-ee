@@ -27,7 +27,8 @@ public class UserService {
    * Get user by id
    *
    * @param User id
-   * @return Response
+   *
+   * @return Response with found user
    */
   @GET @Path("/{userId}")
   public Response getUser(@PathParam("userId") int userId) {
@@ -42,10 +43,11 @@ public class UserService {
    * Get todo lists for user
    *
    * @param id User id
-   * @return Response
+   *
+   * @return Response with the found todolists
    */
   @GET @Path("/{userId}/lists")
-  public Response getLists(@PathParam("userId") int userId) {
+  public Response getTodoLists(@PathParam("userId") int userId) {
     List<TodoList> todoLists = facade.getTodoLists(userId);
 
     ResponseBuilder response = null != todoLists ? Response.ok() : Response.noContent();
@@ -53,8 +55,15 @@ public class UserService {
     return response.entity(todoLists).build();
   }
 
+  /**
+   * Get todo items in a todo list
+   * @param userId User id
+   * @param listId Todo list id
+   *
+   * @return Response with found todo items
+   */
   @GET @Path("/{userId}/lists/{listId}/items")
-  public Response getTodoList(
+  public Response getTodoListItems(
     @PathParam("userId") int userId,
     @PathParam("listId") int listId
   ) {
@@ -63,5 +72,27 @@ public class UserService {
     ResponseBuilder response = null != items ? Response.ok() : Response.noContent();
 
     return response.entity(items).build();
+  }
+
+  /**
+   * Get single todo item in a list
+   *
+   * @param userId User id
+   * @param listId Todo list id
+   * @param itemId Todo item id
+   *
+   * @return Response with found todo item
+   */
+  @GET @Path("/{userId}/lists/{listId}/items/{itemId}")
+  public Response getTodoItem(
+    @PathParam("userId") int userId,
+    @PathParam("listId") int listId,
+    @PathParam("itemId") int itemId
+  ) {
+    TodoItem item = facade.getTodoItem(userId, listId, itemId);
+
+    ResponseBuilder response = null != item ? Response.ok() : Response.noContent();
+
+    return response.entity(item).build();
   }
 }

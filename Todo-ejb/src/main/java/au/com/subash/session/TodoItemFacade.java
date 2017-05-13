@@ -10,6 +10,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -49,5 +50,20 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
     if (null == list) { return null; }
 
     return list.getTodoitemList();
+  }
+
+  @Override
+  public Todoitem getTodoItem(int userId, int listId, int todoId) {
+    TypedQuery<Todoitem> query = em.createNamedQuery(
+      "Todoitem.findByListIdAndTodoId", Todoitem.class
+    );
+
+    query.setParameter("todoId", todoId);
+    query.setParameter("listId", listId);
+    query.setParameter("userId", userId);
+
+    List<Todoitem> results = query.getResultList();
+
+    return results.isEmpty() ? null : results.get(0);
   }
 }

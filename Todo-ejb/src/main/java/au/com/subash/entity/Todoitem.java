@@ -27,7 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Todoitem.findAll", query = "SELECT t FROM Todoitem t")
     , @NamedQuery(name = "Todoitem.findById", query = "SELECT t FROM Todoitem t WHERE t.id = :id")
     , @NamedQuery(name = "Todoitem.findByTitle", query = "SELECT t FROM Todoitem t WHERE t.title = :title")
-    , @NamedQuery(name = "Todoitem.findByIscomplete", query = "SELECT t FROM Todoitem t WHERE t.iscomplete = :iscomplete")})
+    , @NamedQuery(name = "Todoitem.findByIscomplete", query = "SELECT t FROM Todoitem t WHERE t.iscomplete = :iscomplete")
+    , @NamedQuery(name = "Todoitem.findByListIdAndTodoId", query = "SELECT t FROM Todoitem t WHERE t.id = :todoId AND t.todolistid.id = :listId AND t.todolistid.appuser.id = :userId")
+})
 public class Todoitem implements Serializable {
 
     private static final long serialVersionUID = 1L;
