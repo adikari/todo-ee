@@ -12,20 +12,20 @@
             <li>
                 <div class="userView">
                     <div class="background indigo"></div>
-                    <h:commandLink value="Logout" class="white-text right" action="#{authBean.logout()}"/> 
+                    <h:commandLink value="Logout" class="white-text right" action="#{authBean.logout()}"/>
                     <img class="circle" src="https://robohash.org/#{todoBean.user.firstname}?set=set2" />
                     <span class="white-text bold name">#{todoBean.user.fullname}</span>
                     <span class="white-text email">#{todoBean.user.email}</span>
                 </div>
             </li>
-            
+
             <li>
                 <h:commandLink title="Add new todo list" class="btn indigo waves-effect waves-light">
                     Add new list<i class="material-icons right">add</i>
                     <f:ajax execute="@form" render="lists main" listener="#{todoBean.addTodoList}" />
                 </h:commandLink>
             </li>
-            
+
             <li>
                 <div class="divider"></div>
             </li>
@@ -33,12 +33,12 @@
             <h:panelGroup id="lists">
                 <ui:repeat value="#{todoBean.todoLists}" var="todoList">
                     <li class="bold #{todoBean.isSelectedList(todoList) ? 'active' : ''}">
-                        <h:commandLink 
-                            class="waves-effect waves-teal" 
+                        <h:commandLink
+                            class="waves-effect waves-teal"
                             value="#{todoList.title}">
-                            <f:ajax 
-                                execute="@form" 
-                                render=":main :sidebar:lists" 
+                            <f:ajax
+                                execute="@form"
+                                render=":main :sidebar:lists"
                                 listener="#{todoBean.setSelectedList(todoList)}" />
                         </h:commandLink>
                     </li>

@@ -37,6 +37,11 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
+  public AppUser getUserByEmail(String email) {
+    return userDAO2DTO(userFacade.getUserByEmail(email));
+  }
+
+  @Override
   // @RolesAllowed({"USER"})
   public List<TodoList> getTodoLists(int userId) {
     List<Todolist> lists = todoListFacade.getAll(userId);

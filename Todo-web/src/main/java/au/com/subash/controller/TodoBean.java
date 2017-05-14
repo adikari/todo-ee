@@ -31,7 +31,7 @@ public class TodoBean implements Serializable {
 
   @PostConstruct
   public void init() {
-    // user = facade.getUser(1);
+    user = facade.getUserByEmail(getUserEmail());
     // todoLists = facade.getTodoLists(user.getId());
 
     // if (todoLists.size() > 0) {
@@ -192,5 +192,14 @@ public class TodoBean implements Serializable {
    */
   public boolean isSelectedList(TodoList list) {
     return selectedList.getId() == list.getId();
+  }
+
+  /**
+   * Get logged in user email
+   *
+   * @return User email address
+   */
+  private String getUserEmail() {
+    return "subash.adikari@gmail.com";
   }
 }
