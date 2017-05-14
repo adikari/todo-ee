@@ -1,17 +1,19 @@
 package au.com.subash.controller;
 
-import au.com.subash.entity.AppUser;
-import au.com.subash.entity.TodoItem;
-import au.com.subash.entity.TodoList;
-import au.com.subash.session.ManageTodoListFacadeRemote;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
+import au.com.subash.entity.AppUser;
+import au.com.subash.entity.TodoItem;
+import au.com.subash.entity.TodoList;
+import au.com.subash.session.ManageTodoListFacadeRemote;
 
 /**
  *
@@ -227,6 +229,9 @@ public class TodoBean implements Serializable {
    * @return User email address
    */
   private String getUserEmail() {
-    return "subash.adikari@gmail.com";
+    return FacesContext.getCurrentInstance()
+      .getExternalContext()
+      .getUserPrincipal()
+      .getName();
   }
 }
