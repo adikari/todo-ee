@@ -7,7 +7,9 @@ import au.com.subash.session.ManageTodoListFacadeRemote;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -105,10 +107,12 @@ public class TodoBean implements Serializable {
    * @param selectedList TodoList
    */
   public void setSelectedList(TodoList selectedList) {
-    // this.selectedList = todoLists.stream()
-    //         .filter(l -> l.getId() == selectedList.getId())
-    //         .findFirst()
-    //         .get();
+    this.selectedList = todoLists.stream()
+            .filter(l -> l.getId() == selectedList.getId())
+            .findFirst()
+            .get();
+
+    todoItems = facade.getTodoItems(user.getId(), selectedList.getId());
   }
 
   /**
@@ -133,12 +137,13 @@ public class TodoBean implements Serializable {
    * Add new list
    */
   public void addTodoList() {
-    // TodoList list = facade.addTodoList(new TodoList("Untitled"));
+    TodoList list = facade.addTodoList(user.getId(), new TodoList("Untitled"));
 
-    // if (null != list) {
-    //     selectedList = list;
-    //     todoLists.add(selectedList);
-    // }
+    if (null != list) {
+        selectedList = list;
+        todoLists.add(selectedList);
+        todoItems = new ArrayList<TodoItem>();
+    }
   }
 
   /**
@@ -167,9 +172,8 @@ public class TodoBean implements Serializable {
    *
    * @return boolean
    */
-  public TodoList updateSelectedList() {
-    return null;
-    // return facade.updateTodoList(selectedList);
+  public boolean updateSelectedList() {
+    return facade.updateTodoList(user.getId(), selectedList);
   }
 
   /**
@@ -178,17 +182,17 @@ public class TodoBean implements Serializable {
    */
   public void removeTodoList() {
 
-//     if (!facade.removeTodoList(selectedList.getId())) {
-//         return;
-//     }
+    if (!facade.deleteTodoList(user.getId(), selectedList.getId())) {
+        return;
+    }
 
-//     todoLists.remove(selectedList);
+    todoLists.remove(selectedList);
 
-//     if (todoLists.size() > 0) {
-//         selectedList = todoLists.get(0);
-//     } else {
-//         selectedList = null;
-//     }
+    if (todoLists.size() > 0) {
+        selectedList = todoLists.get(0);
+    } else {
+        selectedList = null;
+    }
   }
 
   /**
