@@ -154,17 +154,16 @@ public class TodoBean implements Serializable {
         return;
     }
 
-    // TodoItem item = new TodoItem(newTodoItem, selectedList.getId());
+    TodoItem item = facade.addTodoItem(
+        user.getId(),
+        selectedList.getId(),
+        new TodoItem(newTodoItem)
+    );
 
-    // TODO: use different api
-    // selectedList.getTodoitemCollection().add(item);
-
-    // TodoList updateList = updateSelectedList();
-
-    // if (null != updateList) {
-    //     selectedList = updateList;
-    //     setNewTodoItem(null);
-    // }
+    if (null != item) {
+      todoItems.add(item);
+      setNewTodoItem(null);
+    }
   }
 
   /**
