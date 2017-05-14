@@ -1,8 +1,5 @@
 create table TODOLIST (
-    ID int not null PRIMARY KEY
-    GENERATED ALWAYS AS IDENTITY
-    (START WITH 1, INCREMENT BY 1),
+    ID int not null PRIMARY KEY,
     TITLE varchar(100) not null,
-    APPUSER int not null,
-    CONSTRAINT FK_USER FOREIGN key (APPUSER) REFERENCES APPUSER(ID)
+    APPUSER int not null REFERENCES APPUSER(ID)
 );

@@ -1,9 +1,6 @@
 create table TODOITEM (
-    ID int not null PRIMARY KEY
-    GENERATED ALWAYS AS IDENTITY
-    (START WITH 1, INCREMENT BY 1),
+    ID int not null PRIMARY KEY,
     TITLE varchar(100) not null,
     ISCOMPLETE boolean not null,
-    TODOLISTID int not null,
-    CONSTRAINT FK_TODOLIST_ITEM FOREIGN key (TODOLISTID) REFERENCES TODOLIST(ID)
+    TODOLISTID int not null REFERENCES TODOLIST(ID)
 );

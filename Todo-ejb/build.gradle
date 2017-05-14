@@ -9,7 +9,7 @@ buildscript {
 
   dependencies {
     classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.2.0"
-    classpath "org.apache.derby:derbyclient:10.13.1.1"
+    classpath "org.postgresql:postgresql:42.1.1"
   }
 }
 
@@ -21,7 +21,6 @@ dependencies {
 }
 
 flyway {
-  url = 'jdbc:derby://localhost:1527/todo'
+  url = 'jdbc:postgresql://localhost:5432/todo'
   user = 'todo'
-  password = 'todo'
 }
