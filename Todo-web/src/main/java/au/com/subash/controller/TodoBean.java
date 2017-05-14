@@ -189,8 +189,10 @@ public class TodoBean implements Serializable {
 
     if (todoLists.size() > 0) {
         selectedList = todoLists.get(0);
+        setSelectedList(selectedList);
     } else {
         selectedList = null;
+        todoItems = new ArrayList<TodoItem>();
     }
   }
 
