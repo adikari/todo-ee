@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,12 +31,22 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Todolist.findAll", query = "SELECT t FROM Todolist t")
     , @NamedQuery(name = "Todolist.findById", query = "SELECT t FROM Todolist t WHERE t.id = :id")
-    , @NamedQuery(name = "Todolist.findByTitle", query = "SELECT t FROM Todolist t WHERE t.title = :title")})
+    , @NamedQuery(name = "Todolist.findByTitle", query = "SELECT t FROM Todolist t WHERE t.title = :title")
+    , @NamedQuery(name = "Todolist.findByIdAndUserId", query = "SELECT t FROM Todolist t WHERE t.id = :listId AND t.appuser.id = :userId")
+})
 public class Todolist implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+      name = "todolist_id_seq",
+      sequenceName = "todolist_id_seq",
+      allocationSize = 1
+    )
+    @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "todolist_id_seq"
+    )
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -47,7 +58,7 @@ public class Todolist implements Serializable {
     @JoinColumn(name = "APPUSER", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Appuser appuser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid", orphanRemoval = true)
     private List<Todoitem> todoitemList;
 
     public Todolist() {

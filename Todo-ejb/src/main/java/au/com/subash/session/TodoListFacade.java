@@ -1,7 +1,11 @@
 package au.com.subash.session;
 
+import au.com.subash.entity.Appuser;
 import au.com.subash.entity.Todolist;
+
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,55 +20,82 @@ import javax.persistence.TypedQuery;
 @LocalBean
 public class TodoListFacade implements TodoListFacadeLocal {
 
-    @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
-    
-    /**
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Todolist find(int id) {
-        return em.find(Todolist.class, id);
+  @PersistenceContext(unitName = "au.com.subash_Todo-ejb_ejb_1.0-SNAPSHOTPU")
+  private EntityManager em;
+
+  @EJB
+  private UserFacadeLocal userFacade;
+
+  @Override
+  public List<Todolist> getAll(int userId) {
+    Appuser user = userFacade.getUser(userId);
+
+    if (null != user) {
+      return user.getTodolistList();
     }
 
-    @Override
-    public List<Todolist> getAll() {
-        TypedQuery<Todolist> query = em.createNamedQuery("Todolist.findAll", Todolist.class);
-        
-        return query.getResultList();
-    }
+    return null;
+  }
 
-    @Override
-    public boolean remove(int id) {
-        Todolist found = find(id);
-        
-        if (null != found) {
-            em.remove(found);
-            return true;
-        }
-               
-        return false;
-    }
+  /**
+   *
+   * @param id
+   * @return
+   */
+  @Override
+  public Todolist find(int id) {
+    return em.find(Todolist.class, id);
+  }
 
-    @Override
-    public Todolist create(Todolist list) {
-        em.persist(list);
-        em.flush();
-        return list;
-    }
+  @Override
+  public Todolist find(int userId, int listId) {
+    Appuser user = userFacade.getUser(userId);
 
-    @Override
-    public Todolist update(Todolist list) {
-        Todolist found = find(list.getId());
-        
-        if (null != found) {
-            em.merge(list);
-            em.flush();
-            return found;
-        }
+    if (null == user) { return null; }
 
-        return null;
-    }
+    TypedQuery<Todolist> query = em.createNamedQuery(
+      "Todolist.findByIdAndUserId", Todolist.class
+    );
+
+    query.setParameter("listId", listId);
+    query.setParameter("userId", userId);
+
+    List<Todolist> results = query.getResultList();
+
+    return results.isEmpty() ? null : results.get(0);
+  }
+
+  @Override
+  public Todolist create(int userId, Todolist list) {
+    Appuser user = userFacade.getUser(userId);
+
+    if (null == user) { return null; }
+
+    list.setAppuser(user);
+    em.persist(list);
+    em.flush();
+
+    return list;
+  }
+
+  @Override
+  public boolean remove(int userId, int listId) {
+    Todolist list = find(userId, listId);
+
+    if (null == list) { return false; }
+
+    em.remove(list);
+    return true;
+  }
+
+  @Override
+  public boolean update(int userId, Todolist list) {
+    Todolist foundList = find(userId, list.getId());
+
+    if (null == foundList) { return false; }
+
+    list.setAppuser(foundList.getAppuser());
+    em.merge(list);
+    return true;
+  }
 }

@@ -15,7 +15,7 @@ dependencies {
   }
 }
 
-task run(dependsOn: "ear", type: Exec) {
+task deploy(dependsOn: "ear", type: Exec) {
   group = 'Build'
   description = 'Build ear and deploy to glassfish server'
 
@@ -30,14 +30,14 @@ task run(dependsOn: "ear", type: Exec) {
   }
 }
 
-task startServer(dependsOn: "startDb", type: Exec) {
+task startServer(type: Exec) {
   group = 'Build Setup'
   description = 'Start glassfish server'
 
   ignoreExitValue true
 
   commandLine "${asadminBin}/asadmin"
-  args "start-domain", "${domain}"
+  args "start-domain", "--debug", "${domain}"
 
   standardOutput = new ByteArrayOutputStream()
 
@@ -47,23 +47,8 @@ task startServer(dependsOn: "startDb", type: Exec) {
 
   doLast {
     if(execResult.exitValue == 1) {
-      logger.info(startServer.output())
+      logger.warn(startServer.output())
     }
-  }
-}
-
-task startDb(type: Exec) {
-  group = 'Build Setup'
-  description = 'Start derby database'
-
-  commandLine "asadmin"
-
-  args "start-database", "--dbhome", dbhome
-
-  standardOutput = new ByteArrayOutputStream()
-
-  ext.output = {
-    return standardOutput.toString()
   }
 }
 

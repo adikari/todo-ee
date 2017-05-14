@@ -1,7 +1,9 @@
 package au.com.subash.session;
 
 import au.com.subash.entity.Todolist;
+
 import java.util.List;
+
 import javax.ejb.Local;
 
 /**
@@ -10,42 +12,61 @@ import javax.ejb.Local;
  */
 @Local
 public interface TodoListFacadeLocal {
-    /**
-     * Find list
-     * 
-     * @param id Id of list to find
-     * @return Found list
-     */
-    Todolist find(int id);
-    
-    /**
-     * Get all lists
-     * 
-     * @return All lists
-     */
-    List<Todolist> getAll();
-    
-    /**
-     * Remove a list
-     * 
-     * @param id Id of list to remove
-     * @return Success or failure
-     */
-    boolean remove(int id);
-    
-    /**
-     * Create new list
-     * 
-     * @param list New list to create
-     * @return Created list
-     */
-    Todolist create(Todolist list);
-    
-    /**
-     * Update list
-     * 
-     * @param list List to update
-     * @return Success or failure
-     */
-    Todolist update(Todolist list);
+
+  /**
+   * Find list
+   *
+   * @param id Id of list to find
+   * @return Found list
+   */
+  Todolist find(int id);
+
+  /**
+   * Find todo list by user id and list id
+   *
+   * @param userId User id
+   * @param listId List id
+   *
+   * @return Found Todo list
+   */
+  Todolist find(int userId, int listId);
+
+  /**
+   *  Get todo lists for given user
+   *
+   *  @param userId User id
+   *  @return List of todo lists
+   */
+  List<Todolist> getAll(int userId);
+
+  /**
+   * Create new list
+   *
+   * @param userId User id
+   * @param list New list to create
+   *
+   * @return Created list
+   */
+  Todolist create(int userId, Todolist list);
+
+  /**
+   * Create new list
+   *
+   * @param userId User id
+   * @param list New list to create
+   *
+   * @return Created list
+   */
+  boolean remove(int userId, int listId);
+
+
+  /**
+   * Update todo list
+   *
+   * @param userId User id
+   * @param list Todolist to update
+   *
+   * @return Success or failure
+   */
+  boolean update(int userId, Todolist list);
 }

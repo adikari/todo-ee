@@ -4,6 +4,10 @@ description = 'Todo-web'
 
 dependencies {
   compile group: 'org.primefaces', name: 'primefaces', version:'6.1'
+
   compile project(':Todo-ri')
-  providedCompile group: 'javax', name: 'javaee-web-api', version:'7.0'
+
+  providedCompile 'javax:javaee-web-api:7.0',
+                  "org.glassfish.jersey.core:jersey-common:${jerseyVersion}",
+                  "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
 }

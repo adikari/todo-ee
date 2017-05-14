@@ -1,48 +1,33 @@
 package au.com.subash.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author subash
  */
 public class TodoList {
-    private int id;
-    private List<TodoItem> todoitemCollection;
-    private String title;
-    
-    public TodoList(int id, String title, List todoItems) {
-        this(title, todoItems);
-        this.id = id;
-    }
-    
-    public TodoList(String title, List todoItems) {
-        this.title = title;
-        this.todoitemCollection = todoItems;
-    }
-   
-    public TodoList(String title) {
-        this(title, new ArrayList());
-    }
-    
-    public List<TodoItem> getTodoitemCollection() {
-        return todoitemCollection;
-    }
+  private int id;
+  private String title;
 
-    public int getId() {
-        return id;
-    }
+  public TodoList() { }
 
-    public void setTodoitemCollection(List<TodoItem> todoitemCollection) {
-        this.todoitemCollection = todoitemCollection;
-    }
+  public TodoList(String title) {
+    this.title = title;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public TodoList(int id, String title) {
+    this(title);
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public int getId() {
+    return id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
 }
