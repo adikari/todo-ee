@@ -50,11 +50,11 @@
                 </h:form>
             </div>
 
-            <!-- <ul> -->
-            <!--     <ui:repeat value="#{todoBean.selectedList.todoitemCollection}" var="todoItem"> -->
-            <!--         <ui:include src="todoitem.xhtml" /> -->
-            <!--     </ui:repeat> -->
-            <!-- </ul> -->
+            <ul>
+                <ui:repeat value="#{todoBean.todoItems}" var="todoItem">
+                    <ui:include src="todoitem.xhtml" />
+                </ui:repeat>
+            </ul>
         </c:if>
 
         <c:if test="#{empty todoBean.selectedList}">

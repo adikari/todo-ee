@@ -25,6 +25,7 @@ public class TodoBean implements Serializable {
   private ManageTodoListFacadeRemote facade;
 
   private List<TodoList> todoLists;
+  private List<TodoItem> todoItems;
   private TodoList selectedList;
   private String newTodoItem;
   private AppUser user;
@@ -32,13 +33,15 @@ public class TodoBean implements Serializable {
   @PostConstruct
   public void init() {
     user = facade.getUserByEmail(getUserEmail());
-    // todoLists = facade.getTodoLists(user.getId());
+    todoLists = facade.getTodoLists(user.getId());
 
-    // if (todoLists.size() > 0) {
-    //   selectedList = todoLists.get(0);
-    // } else {
-    //   addTodoList();
-    // }
+    if (todoLists.size() > 0) {
+      selectedList = todoLists.get(0);
+      todoItems = facade.getTodoItems(user.getId(), selectedList.getId());
+    } else {
+      // TODO: make sure this works with user with no lists
+      addTodoList();
+    }
   }
 
   /**
@@ -69,6 +72,25 @@ public class TodoBean implements Serializable {
   }
 
   /**
+   * Get todoitems
+   *
+  * @return the todoItems
+  */
+  public List<TodoItem> getTodoItems() {
+    return todoItems;
+  }
+
+  /**
+   * Set todo items
+   *
+   * @param todoItems the todoItems to set
+   * @return TOdo items
+   */
+  public void setTodoItems(List<TodoItem> todoItems) {
+    this.todoItems = todoItems;
+  }
+
+  /**
    * Get selected list
    *
    * @return Selected List
@@ -83,10 +105,10 @@ public class TodoBean implements Serializable {
    * @param selectedList TodoList
    */
   public void setSelectedList(TodoList selectedList) {
-    this.selectedList = todoLists.stream()
-            .filter(l -> l.getId() == selectedList.getId())
-            .findFirst()
-            .get();
+    // this.selectedList = todoLists.stream()
+    //         .filter(l -> l.getId() == selectedList.getId())
+    //         .findFirst()
+    //         .get();
   }
 
   /**
@@ -132,12 +154,12 @@ public class TodoBean implements Serializable {
     // TODO: use different api
     // selectedList.getTodoitemCollection().add(item);
 
-    TodoList updateList = updateSelectedList();
+    // TodoList updateList = updateSelectedList();
 
-    if (null != updateList) {
-        selectedList = updateList;
-        setNewTodoItem(null);
-    }
+    // if (null != updateList) {
+    //     selectedList = updateList;
+    //     setNewTodoItem(null);
+    // }
   }
 
   /**
