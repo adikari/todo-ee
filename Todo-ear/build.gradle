@@ -30,7 +30,7 @@ task deploy(dependsOn: "ear", type: Exec) {
   }
 }
 
-task startServer(dependsOn: "startDb", type: Exec) {
+task startServer(type: Exec) {
   group = 'Build Setup'
   description = 'Start glassfish server'
 
@@ -49,21 +49,6 @@ task startServer(dependsOn: "startDb", type: Exec) {
     if(execResult.exitValue == 1) {
       logger.warn(startServer.output())
     }
-  }
-}
-
-task startDb(type: Exec) {
-  group = 'Build Setup'
-  description = 'Start derby database'
-
-  commandLine "asadmin"
-
-  args "start-database", "--dbhome", dbhome
-
-  standardOutput = new ByteArrayOutputStream()
-
-  ext.output = {
-    return standardOutput.toString()
   }
 }
 
