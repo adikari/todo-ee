@@ -199,13 +199,13 @@ public class TodoBean implements Serializable {
    * @param todoItem TodoItem
    */
   public void toogleTodoItem(TodoItem todoItem) {
-    // TodoItem item = selectedList.getTodoitemCollection().stream()
-    //         .filter(t -> t.getTitle().equals(todoItem.getTitle()))
-    //         .findFirst().get();
+    TodoItem item = todoItems.stream()
+            .filter(t -> t.getTitle().equals(todoItem.getTitle()))
+            .findFirst().get();
 
-    // if (!facade.updateTodoItem(item)) {
-    //     item.setIscomplete(!item.getIscomplete());
-    // }
+    if (!facade.updateTodoItem(user.getId(), selectedList.getId(), item)) {
+        item.setIscomplete(!item.getIscomplete());
+    }
   }
 
   /**

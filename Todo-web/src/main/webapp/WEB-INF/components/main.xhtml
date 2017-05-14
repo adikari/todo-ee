@@ -9,7 +9,7 @@
              xmlns:p="http://primefaces.org/ui">
 
     <h:panelGroup id="main">
-        <c:if test="#{not empty todoBean.todoItems}">
+        <c:if test="#{not empty todoBean.selectedList}">
             <div class="title">
                 <h1>
                     <h:form onsubmit="return false;">
@@ -57,7 +57,7 @@
             </ul>
         </c:if>
 
-        <c:if test="#{empty todoBean.todoItems}">
+        <c:if test="#{empty todoBean.selectedList}">
             <p class="empty">There are no Todo Lists. Please create one.</p>
         </c:if>
     </h:panelGroup>
