@@ -36,12 +36,13 @@ public class TodoBean implements Serializable {
   public void init() {
     user = facade.getUserByEmail(getUserEmail());
     todoLists = facade.getTodoLists(user.getId());
+    todoItems = new ArrayList<TodoItem>();
 
     if (null != todoLists && todoLists.size() > 0) {
       selectedList = todoLists.get(0);
       todoItems = facade.getTodoItems(user.getId(), selectedList.getId());
     } else {
-      todoItems = new ArrayList<TodoItem>();
+      addTodoList();
     }
   }
 
