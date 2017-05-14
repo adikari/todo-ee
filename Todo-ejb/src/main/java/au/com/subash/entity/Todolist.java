@@ -38,11 +38,15 @@ public class Todolist implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @SequenceGenerator(name = "todolist_id_seq",
-                       sequenceName = "todolist_id_seq",
-                       allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "todolist_id_seq")
+    @SequenceGenerator(
+      name = "todolist_id_seq",
+      sequenceName = "todolist_id_seq",
+      allocationSize = 1
+    )
+    @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "todolist_id_seq"
+    )
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -54,7 +58,7 @@ public class Todolist implements Serializable {
     @JoinColumn(name = "APPUSER", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Appuser appuser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "todolistid", orphanRemoval = true)
     private List<Todoitem> todoitemList;
 
     public Todolist() {
