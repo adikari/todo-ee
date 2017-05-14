@@ -74,6 +74,7 @@ public class TodoItemFacade implements TodoItemFacadeLocal {
     if (null == list) { return null; }
 
     item.setTodolistid(list);
+    list.getTodoitemList().add(item);
     em.persist(item);
     em.flush();
 
