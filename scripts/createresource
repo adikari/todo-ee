@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Path to asadmin
+ASADMIN=/Applications/NetBeans/glassfish-4.1.1/glassfish/bin/asadmin
+
 # Database connection variables
 USER=todo
 PASSWORD=todo
@@ -28,23 +31,23 @@ ENC=none
 REALM_NAME=JDBC_TODO
 
 # Create JDBC connection pool
-asadmin create-jdbc-connection-pool \
+$ASADMIN create-jdbc-connection-pool \
         --datasourceclassname $DATASOURCE_CLASSNAME \
         --restype javax.sql.DataSource \
         --property URL=$DB_URL:driverClass=$DRIVER_CLASS:Password=$PASSWORD:portNumber=$PORT:databaseName=$DATABASE:User=$USER:serverName=$SERVER $POOL_NAME
 
 # Create JDBC resource
-asadmin create-jdbc-resource --connectionpoolid $POOL_NAME $RESOURCE
+$ASADMIN create-jdbc-resource --connectionpoolid $POOL_NAME $RESOURCE
 
 # Enable default principal to role mapping
-asadmin set server-config.security-service.activate-default-principal-to-role-mapping=true
+$ASADMIN set server-config.security-service.activate-default-principal-to-role-mapping=true
 
 # Create JDBC Realm
-asadmin create-auth-realm --classname com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm \
+$ASADMIN create-auth-realm --classname com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm \
   --property jaas-context=$JAAS_CONTEXT:datasource-jndi=$JNDI:user-table=$USER_TABLE:user-name-column=$USER_NAME_COLUMN:password-column=$PASSWORD_COLUMN:group-table=$USER_TABLE:group-name-column=$GROUP_NAME_COLUMN:digest-algorithm=$DIGEST:digestrealm-password-enc-algorithm=$ENC $REALM_NAME
 
 # Set JDBC Realm as default
-asadmin set server-config.security-service.default-realm=$REALM_NAME
+$ASADMIN set server-config.security-service.default-realm=$REALM_NAME
 
 
 

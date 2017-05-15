@@ -2,7 +2,6 @@ apply plugin: "ear"
 
 description = "Todo-ear"
 
-def dbhome = "/Users/subash/.netbeans-derby"
 def domain = "domain1"
 def asadminBin = "/Applications/NetBeans/glassfish-4.1.1/glassfish/bin"
 
