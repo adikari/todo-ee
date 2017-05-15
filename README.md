@@ -3,16 +3,16 @@ Java EE todo application with gradle build. The project is not dependent on IDE 
 
 ## Requirements
 
-1. Glassfish server
-2. Postgresql
-3. Gradle
+1. [Glassfish server](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)
+2. [Postgresql](https://www.postgresql.org/)
+3. [Gradle](https://gradle.org/)
 
-## Set up
+## Pre-requisite
 
 Update the `todo-ear/gradle.build` with correct variable values. 
 
 1. domain: glassfish domain to use
-2. asadminBin: Path to where your asadmin command is. Usually in ${glassfish_home}/glassfish/bin.
+2. asadminBin: Path to where your asadmin command is. Usually in `${glassfish_home}/glassfish/bin`.
 
 Also update the path to `asadmin` in `scripts/createresource`.
 
@@ -20,6 +20,11 @@ Also update the path to `asadmin` in `scripts/createresource`.
 2. Update database connection variables if necessary.
 
 Make sure that the database `todo` is created and postgres is running before continuing with the setup.
+
+**Important**: Glassfish doesn't come with postgress by default. You will need:
+
+1. Download the postgres java driver jar from [here](https://jdbc.postgresql.org/download/postgresql-42.1.1.jar).
+2. Copy that into `${glassfish_home}/glassfish/modules/`.
 
 ### First time setup
 
