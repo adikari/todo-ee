@@ -3,16 +3,17 @@ Java EE todo application with gradle build. The project is not dependent on IDE 
 
 ## Requirements
 
-1. Glassfish server
-2. Postgresql
-3. Gradle
+1. [Glassfish server](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)
+2. [Postgresql](https://www.postgresql.org/)
+3. [Gradle](https://gradle.org/)
+4. [JDK 8 or above](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
-## Set up
+## Pre-requisite
 
-Update the `todo-ear/gradle.build` with correct variable values. 
+Update the `todo-ear/gradle.build` with correct variable values.
 
 1. domain: glassfish domain to use
-2. asadminBin: Path to where your asadmin command is. Usually in ${glassfish_home}/glassfish/bin.
+2. asadminBin: Path to where your asadmin command is. Usually in `${glassfish_home}/glassfish/bin`.
 
 Also update the path to `asadmin` in `scripts/createresource`.
 
@@ -20,6 +21,11 @@ Also update the path to `asadmin` in `scripts/createresource`.
 2. Update database connection variables if necessary.
 
 Make sure that the database `todo` is created and postgres is running before continuing with the setup.
+
+**Important**: Glassfish doesn't come with postgress by default. You will need:
+
+1. Download the postgres java driver jar from [here](https://jdbc.postgresql.org/download/postgresql-42.1.1.jar).
+2. Copy that into `${glassfish_home}/glassfish/modules/`.
 
 ### First time setup
 
@@ -29,13 +35,13 @@ $ cd todo-ee
 $ ./scripts/createresource
 $ gradle startServer
 $ gradle flywayMigrate
-$ gradle deploy 
+$ gradle deploy
 ```
 
 Assuming everything went successfully, you can go to http://localhost:8080/todo-rest/ to access the site. The rest api can be accessed at http://localhost:8080/todo-rest/api/.
 
 
-There are 2 default users seeded to the database. Password is currently saved as plain text. Check the [migration script](https://github.com/adikari/todo-ee/blob/master/Todo-ejb/src/main/resources/db/migration/V4__Add_Users.sql) for username and password to login. 
+There are 2 default users seeded to the database. Password is currently saved as plain text. Check the [migration script](https://github.com/adikari/todo-ee/blob/master/Todo-ejb/src/main/resources/db/migration/V4__Add_Users.sql) for username and password to login.
 
 
 ### Development
