@@ -4,6 +4,8 @@ description = "Todo-ear"
 
 def domain = "domain1"
 def asadminBin = "/Applications/NetBeans/glassfish-4.1.1/glassfish/bin"
+def adminUser = "admin"
+def passwordFile = "../passwordfile"
 
 dependencies {
   deploy project(":Todo-ejb")
@@ -20,13 +22,20 @@ task deploy(dependsOn: "ear", type: Exec) {
 
   commandLine "asadmin"
 
-  args "deploy", "--force=true", "${ear.archivePath}"
+  args "deploy", "--force=true", "--user=${adminUser}", "--passwordfile=${passwordFile}", "${ear.archivePath}"
 
   standardOutput = new ByteArrayOutputStream()
 
   ext.output = {
     return standardOutput.toString()
   }
+
+  doLast {
+    if(execResult.exitValue == 1) {
+      logger.warn(deploy.output())
+    }
+  }
+
 }
 
 task startServer(type: Exec) {
