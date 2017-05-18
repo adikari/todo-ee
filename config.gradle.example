@@ -1,0 +1,6 @@
+ext {
+  gfDomain = 'domain1'
+  gfAdmin = 'admin'
+  gfPasswordFile = "$rootDir/passwordfile"
+}
+
