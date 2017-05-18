@@ -2,9 +2,6 @@ apply plugin: "ear"
 
 description = "Todo-ear"
 
-def domain = "domain1"
-def asadminBin = "/Applications/NetBeans/glassfish-4.1.1/glassfish/bin"
-
 dependencies {
   deploy project(":Todo-ejb")
   deploy project(path: ":Todo-web", configuration: "archives")
@@ -20,13 +17,20 @@ task deploy(dependsOn: "ear", type: Exec) {
 
   commandLine "asadmin"
 
-  args "deploy", "--force=true", "${ear.archivePath}"
+  args "deploy", "--force=true", "--user=$gfAdmin", "--passwordfile=$gfPasswordFile", "$ear.archivePath"
 
   standardOutput = new ByteArrayOutputStream()
 
   ext.output = {
     return standardOutput.toString()
   }
+
+  doLast {
+    if(execResult.exitValue == 1) {
+      logger.warn(deploy.output())
+    }
+  }
+
 }
 
 task startServer(type: Exec) {
@@ -35,8 +39,8 @@ task startServer(type: Exec) {
 
   ignoreExitValue true
 
-  commandLine "${asadminBin}/asadmin"
-  args "start-domain", "--debug", "${domain}"
+  commandLine "asadmin"
+  args "start-domain", "--debug", "$gfDomain"
 
   standardOutput = new ByteArrayOutputStream()
 

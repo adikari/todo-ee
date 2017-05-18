@@ -1,3 +1,9 @@
+def configFile = file("config")
+
+if (!configFile.exists()) {
+  throw new GradleException("Config file not found. Rename config.gradle.example to config.gradle and update its properties accordingly.")
+}
+
 allprojects  {
   apply plugin: 'maven'
 
@@ -8,6 +14,7 @@ allprojects  {
 subprojects {
   apply plugin: 'java'
   apply plugin: 'eclipse'
+  apply from: configFile
 
   ext {
     jerseyVersion = '2.21'
@@ -22,5 +29,4 @@ subprojects {
     maven { url "http://repo.maven.apache.org/maven2" }
   }
 }
-
 

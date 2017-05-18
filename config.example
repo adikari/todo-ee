@@ -1,0 +1,10 @@
+ext {
+  gfDomain = 'domain1'
+  gfAdmin = 'admin'
+  gfPasswordFile = "$rootDir/passwordfile"
+
+  dbUrl = 'jdbc:postgresql://localhost:5432/todo'
+  dbUser = 'todo'
+  dbPassword = 'todo'
+}
+
