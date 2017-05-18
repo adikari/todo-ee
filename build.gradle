@@ -1,3 +1,13 @@
+def configFile = file("config.gradle")
+
+if (!configFile.exists()) {
+  throw new GradleException("Config file not found. Rename config.gradle.example to config.gradle and update its properties accordingly.")
+}
+
+apply from: configFile
+
+println gfDomain
+
 allprojects  {
   apply plugin: 'maven'
 
@@ -12,9 +22,6 @@ subprojects {
   ext {
     jerseyVersion = '2.21'
     jacksonVersion = '2.5.2'
-    gfDomain = 'domain1'
-    gfAdmin = 'admin'
-    gfPasswordFile = "$rootDir/passwordfile"
   }
 
   sourceCompatibility = 1.8
@@ -25,5 +32,4 @@ subprojects {
     maven { url "http://repo.maven.apache.org/maven2" }
   }
 }
-
 
