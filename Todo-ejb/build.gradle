@@ -21,6 +21,7 @@ dependencies {
 }
 
 flyway {
-  url = 'jdbc:postgresql://localhost:5432/todo'
-  user = 'todo'
+  url = "$dbUrl"
+  user = "$dbUser"
+  password = "$dbPassword"
 }
