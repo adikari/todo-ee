@@ -10,22 +10,33 @@ Java EE todo application with gradle build. The project is not dependent on IDE 
 
 ## Pre-requisite
 
-Update the `todo-ear/gradle.build` with correct variable values.
+1. Create config file and glassfish password file
 
-1. domain: glassfish domain to use
-2. asadminBin: Path to where your asadmin command is. Usually in `${glassfish_home}/glassfish/bin`.
+```
+    cp config.example config
+    cp passwordfile.example passwordfile
+```
+    
+2. Update the values in the config file appropriately.
 
-Also update the path to `asadmin` in `scripts/createresource`.
+  **gfDomain:** glassfish domain to use
+  **gfUser:** Username to log in to glassfish as.
+  **gfPasswordFile:** Path to password file. Check the password.example
 
-1. ASADMIN: same as `asadminBin` set up perviously
-2. Update database connection variables if necessary.
+3. Update `Database connection variables` in `scripts/createresource`. Thats the information for glassfish to connect to the database.
 
-Make sure that the database `todo` is created and postgres is running before continuing with the setup.
+4. Make sure that the database `todo` is created and postgres is running.
+
+5. Make sure `asadmin` is in path. Verify this by typing `asadmin --help`. If no command found add that to your ``$PATH.
+
+```
+export PATH=$PATH:path_to_glassfish_home/glassfish/bin
+```
 
 **Important**: Glassfish doesn't come with postgress by default. You will need:
 
 1. Download the postgres java driver jar from [here](https://jdbc.postgresql.org/download/postgresql-42.1.1.jar).
-2. Copy that into `${glassfish_home}/glassfish/modules/`.
+2. Copy that into `path_to_glassfish_home/glassfish/modules/`.
 
 ### First time setup
 
