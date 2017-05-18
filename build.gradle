@@ -1,4 +1,4 @@
-def configFile = file("config.gradle")
+def configFile = file("config")
 
 if (!configFile.exists()) {
   throw new GradleException("Config file not found. Rename config.gradle.example to config.gradle and update its properties accordingly.")
