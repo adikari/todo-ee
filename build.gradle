@@ -12,6 +12,9 @@ subprojects {
   ext {
     jerseyVersion = '2.21'
     jacksonVersion = '2.5.2'
+    gfDomain = 'domain1'
+    gfAdmin = 'admin'
+    gfPasswordFile = "$rootDir/passwordfile"
   }
 
   sourceCompatibility = 1.8
