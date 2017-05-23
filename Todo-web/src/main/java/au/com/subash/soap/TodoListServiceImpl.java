@@ -40,11 +40,10 @@ public class TodoListServiceImpl implements TodoListService {
 
   }
 
-  // @Override
-  // public List<TodoList> getTodoListItems(int userId, int listId) {
-  //   // TODO Auto-generated method stub
-  //   return null;
-  // }
+  @Override
+  public TodoList[] getTodoListItems(int userId, int listId) {
+    return null;
+  }
 
   @Override
   public TodoItem addTodoItem(int userId, int listId, TodoItem item) {
@@ -70,8 +69,13 @@ public class TodoListServiceImpl implements TodoListService {
 
   }
 
-  //   @Override
-//   public List<TodoList> getTodoLists(int userId) {
-//     return null;
-//   }
+  @Override
+  public TodoList[] getTodoLists(int userId) {
+    List<TodoList> lists = facade.getTodoLists(userId);
+    TodoList[] result = new TodoList[lists.size()];
+
+    lists.toArray(result);
+
+    return result;
+  }
 }

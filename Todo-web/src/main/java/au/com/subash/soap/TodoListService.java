@@ -1,8 +1,7 @@
 package au.com.subash.soap;
 
-import java.util.List;
-
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
@@ -18,30 +17,33 @@ public interface TodoListService {
   @WebMethod
   AppUser getUser(int userId);
 
-  @WebMethod
-  void addTodoList(int userId, TodoList list);
+  @WebMethod(operationName = "addTodoList")
+  void addTodoList(
+    @WebParam(name = "userId") int userId,
+    TodoList list
+  );
 
-//   @WebMethod
-//   List<TodoList> getTodoLists(int userId);
+  @WebMethod(operationName = "getTodoLists")
+  TodoList[] getTodoLists(int userId);
 
-  @WebMethod
+  @WebMethod(operationName = "deleteTodoList")
   void deleteTodoList(int userId, int listId);
 
-  @WebMethod
+  @WebMethod(operationName = "updateTodoList")
   void updateTodoList(int userId, TodoList list);
 
-  // @WebMethod
-  // List<TodoList> getTodoListItems(int userId, int listId);
+  @WebMethod(operationName = "getTodoListItems")
+  TodoList[] getTodoListItems(int userId, int listId);
 
-  @WebMethod
+  @WebMethod(operationName = "addTodoItem")
   TodoItem addTodoItem(int userId, int listId, TodoItem item);
 
-  @WebMethod
+  @WebMethod(operationName = "getTodoItem")
   TodoItem getTodoItem(int userId, int listId, int itemId);
 
-  @WebMethod
+  @WebMethod(operationName = "deleteTodoItem")
   void deleteTodoItem(int userId, int listId, int itemId);
 
-  @WebMethod
+  @WebMethod(operationName = "updateTodoItem")
   void updateTodoItem(int userId, int listId, TodoItem item);
 }
