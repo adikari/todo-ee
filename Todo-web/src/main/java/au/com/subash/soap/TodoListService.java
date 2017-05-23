@@ -18,7 +18,7 @@ public interface TodoListService {
   AppUser getUser(@WebParam(name = "userId") int userId);
 
   @WebMethod(operationName = "addTodoList")
-  void addTodoList(
+  TodoList addTodoList(
     @WebParam(name = "userId") int userId,
     TodoList list
   );
@@ -27,19 +27,19 @@ public interface TodoListService {
   TodoList[] getTodoLists(@WebParam(name = "userId") int userId);
 
   @WebMethod(operationName = "deleteTodoList")
-  void deleteTodoList(
+  boolean deleteTodoList(
     @WebParam(name = "userId") int userId,
     @WebParam(name = "listId") int listId
   );
 
   @WebMethod(operationName = "updateTodoList")
-  void updateTodoList(
+  boolean updateTodoList(
     @WebParam(name = "userId") int userId,
     TodoList list
   );
 
   @WebMethod(operationName = "getTodoListItems")
-  TodoList[] getTodoListItems(
+  TodoItem[] getTodoListItems(
     @WebParam(name = "userId") int userId,
     @WebParam(name = "listId") int listId
   );
@@ -59,14 +59,14 @@ public interface TodoListService {
   );
 
   @WebMethod(operationName = "deleteTodoItem")
-  void deleteTodoItem(
+  boolean deleteTodoItem(
     @WebParam(name = "userId") int userId,
     @WebParam(name = "listId") int listId,
     int itemId
   );
 
   @WebMethod(operationName = "updateTodoItem")
-  void updateTodoItem(
+  boolean updateTodoItem(
     @WebParam(name = "userId") int userId,
     @WebParam(name = "listId") int listId,
     TodoItem item

@@ -24,49 +24,48 @@ public class TodoListServiceImpl implements TodoListService {
   }
 
   @Override
-  public void addTodoList(int userId, TodoList list) {
-
+  public TodoList addTodoList(int userId, TodoList list) {
+    return facade.addTodoList(userId, list);
   }
 
   @Override
-  public void deleteTodoList(int userId, int listId) {
-    // TODO Auto-generated method stub
-
+  public boolean deleteTodoList(int userId, int listId) {
+    return facade.deleteTodoList(userId, listId);
   }
 
   @Override
-  public void updateTodoList(int userId, TodoList list) {
-    // TODO Auto-generated method stub
-
+  public boolean updateTodoList(int userId, TodoList list) {
+    return facade.updateTodoList(userId, list);
   }
 
   @Override
-  public TodoList[] getTodoListItems(int userId, int listId) {
-    return null;
+  public TodoItem[] getTodoListItems(int userId, int listId) {
+    List<TodoItem> items = facade.getTodoItems(userId, listId);
+
+    TodoItem[] result = new TodoItem[items.size()];
+    items.toArray(result);
+
+    return result;
   }
 
   @Override
   public TodoItem addTodoItem(int userId, int listId, TodoItem item) {
-    // TODO Auto-generated method stub
-    return null;
+    return facade.addTodoItem(userId, listId, item);
   }
 
   @Override
   public TodoItem getTodoItem(int userId, int listId, int itemId) {
-    // TODO Auto-generated method stub
-    return null;
+    return facade.getTodoItem(userId, listId, itemId);
   }
 
   @Override
-  public void deleteTodoItem(int userId, int listId, int itemId) {
-    // TODO Auto-generated method stub
-
+  public boolean deleteTodoItem(int userId, int listId, int itemId) {
+    return facade.deleteTodoItem(userId, listId, itemId);
   }
 
   @Override
-  public void updateTodoItem(int userId, int listId, TodoItem item) {
-    // TODO Auto-generated method stub
-
+  public boolean updateTodoItem(int userId, int listId, TodoItem item) {
+    return facade.updateTodoItem(userId, listId, item);
   }
 
   @Override
