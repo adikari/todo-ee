@@ -14,8 +14,8 @@ import au.com.subash.entity.TodoList;
 @SOAPBinding(style = Style.RPC)
 public interface TodoListService {
 
-  @WebMethod
-  AppUser getUser(int userId);
+  @WebMethod(operationName = "getUser")
+  AppUser getUser(@WebParam(name = "userId") int userId);
 
   @WebMethod(operationName = "addTodoList")
   void addTodoList(
@@ -24,26 +24,51 @@ public interface TodoListService {
   );
 
   @WebMethod(operationName = "getTodoLists")
-  TodoList[] getTodoLists(int userId);
+  TodoList[] getTodoLists(@WebParam(name = "userId") int userId);
 
   @WebMethod(operationName = "deleteTodoList")
-  void deleteTodoList(int userId, int listId);
+  void deleteTodoList(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId
+  );
 
   @WebMethod(operationName = "updateTodoList")
-  void updateTodoList(int userId, TodoList list);
+  void updateTodoList(
+    @WebParam(name = "userId") int userId,
+    TodoList list
+  );
 
   @WebMethod(operationName = "getTodoListItems")
-  TodoList[] getTodoListItems(int userId, int listId);
+  TodoList[] getTodoListItems(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId
+  );
 
   @WebMethod(operationName = "addTodoItem")
-  TodoItem addTodoItem(int userId, int listId, TodoItem item);
+  TodoItem addTodoItem(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId,
+    TodoItem item
+  );
 
   @WebMethod(operationName = "getTodoItem")
-  TodoItem getTodoItem(int userId, int listId, int itemId);
+  TodoItem getTodoItem(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId,
+    @WebParam(name = "itemId") int itemId
+  );
 
   @WebMethod(operationName = "deleteTodoItem")
-  void deleteTodoItem(int userId, int listId, int itemId);
+  void deleteTodoItem(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId,
+    int itemId
+  );
 
   @WebMethod(operationName = "updateTodoItem")
-  void updateTodoItem(int userId, int listId, TodoItem item);
+  void updateTodoItem(
+    @WebParam(name = "userId") int userId,
+    @WebParam(name = "listId") int listId,
+    TodoItem item
+  );
 }
