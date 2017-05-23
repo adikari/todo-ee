@@ -8,8 +8,8 @@ import au.com.subash.entity.Todoitem;
 import au.com.subash.entity.Todolist;
 import java.util.List;
 import java.util.stream.Collectors;
-// import javax.annotation.security.DeclareRoles;
-// import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -18,7 +18,7 @@ import javax.ejb.Stateless;
  * @author subash
  */
 @Stateless
-// @DeclareRoles({"USER"})
+@DeclareRoles({"USER"})
 // TODO: Need to verify authority of user. compare user id
 public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
 
@@ -42,7 +42,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public List<TodoList> getTodoLists(int userId) {
     List<Todolist> lists = todoListFacade.getAll(userId);
 
@@ -54,7 +54,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public List<TodoItem> getTodoItems(int userId, int listId) {
     List<Todoitem> items = todoItemFacade.getAll(userId, listId);
 
@@ -66,7 +66,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public TodoItem getTodoItem(int userId, int listId, int todoId) {
     Todoitem item = todoItemFacade.find(userId, listId, todoId);
 
@@ -74,7 +74,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public TodoItem addTodoItem(int userId, int listId, TodoItem item) {
     Todoitem dao = todoItemDTO2DAO(item);
 
@@ -84,7 +84,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public TodoList addTodoList(int userId, TodoList list) {
     Todolist dao = todoListDTO2DAO(list);
 
@@ -94,7 +94,7 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public boolean updateTodoList(int userId, TodoList list) {
     Todolist dao = todoListDTO2DAO(list);
 
@@ -102,19 +102,19 @@ public class ManageTodoListFacade implements ManageTodoListFacadeRemote {
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public boolean deleteTodoList(int userId, int listId) {
     return todoListFacade.remove(userId, listId);
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public boolean deleteTodoItem(int userId, int listId, int itemId) {
     return todoItemFacade.remove(userId, listId, itemId);
   }
 
   @Override
-  // @RolesAllowed({"USER"})
+  @RolesAllowed({"USER"})
   public boolean updateTodoItem(int userId, int listId, TodoItem item) {
     Todoitem dao = todoItemDTO2DAO(item);
 
